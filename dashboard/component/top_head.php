@@ -253,86 +253,25 @@
                         </div>
                         <!--end::Theme mode-->
                         <!--begin::User menu-->
-                        <div class="app-navbar-item ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
-                            <!--begin::Menu wrapper-->
-                            <div class="cursor-pointer symbol symbol-35px symbol-md-40px"
-                                data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
-                                data-kt-menu-placement="bottom-end">
-                                <img src="assets/media/stock/etc/user.png" alt="user" />
-                            </div>
-                            <!--begin::User account menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
-                                data-kt-menu="true">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <div class="menu-content d-flex align-items-center px-3">
-                                        <!--begin::Avatar-->
-                                        <div class="symbol symbol-50px me-5">
-                                            <img alt="Logo" src="assets/media/avatars/300-3.jpg" />
-                                        </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::Username-->
-                                        <div class="d-flex flex-column">
-                                            <div class="fw-bold d-flex align-items-center fs-5">
-                                                <?php if (isset($_SESSION['usertype']) == "admin" or isset($_SESSION['usertype']) == "radmin") {
-													echo $_SESSION['fname'] . $_SESSION['lname'];
-												}
-												?>
-                                                <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"><?php if (isset($_SESSION['usertype']) == "admin" or isset($_SESSION['usertype']) == "radmin") {
-																														echo $_SESSION['usertype'];
-																													} ?></span>
-                                            </div>
-                                            <a href="#" class="fw-semibold text-muted text-hover-primary fs-7"><?php if (isset($_SESSION['usertype']) == "admin" or isset($_SESSION['usertype']) == "radmin") {
-																													echo $_SESSION['email'];
-																												} ?></a>
-                                        </div>
-                                        <!--end::Username-->
+                        <div class="notification-container">
+                            <a href="#">
+                                <div class="notification-button">
+                                    <div class="bell-icon">
+                                        <i style="color:#FFA412;font-size:25px;" class="fa-regular fa-bell"></i>
                                     </div>
+                                    <div class="notification-dot"></div>
                                 </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
-                                <!--end::Menu separator-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5">
-                                    <a href="profile.php" class="menu-link px-5">My Profile</a>
+                            </a>
+                        </div>
+                        <div class="profile-component">
+                            <img src="https://s3-alpha-sig.figma.com/img/1b73/04b2/85d08c0f8b29f8fc61ad6621680532e7?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=N7CI4dlKPOLlzK93JjAN1R1GPQx2~BJpw9nTdwAnqXgAsS74TPjqOExGXlieGV02xbC3iwYDuJROxDhho6IOYYTyS97aMBNRE4maGgTcW~nDrPmswQv4jKuSskrAxG0LkaE4~f~bLo91hIK~P3UVk-swqLRfaSOQwQg026ta635X022bAR~n1uXIaC8WeUtQqy9AFdf~BBHBe5tEKVUOcEctipFyHHqi~G70VLkAM3Fp6VPhQ1U8edRF0OHWsueMW9uafEFWkvQrgInESGLB~yeKVoHsOSitd0aRaQ0QGVQc~3kjaiO3p6Edvhdqy2~NAATOJJ0wxpsQZJOfHt49Ng__"
+                                alt="Profile Image" class="profile-image">
+                            <div class="profile-info">
+                                <div class="profile-name">
+                                    Musfiq
                                 </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <!-- <div class="menu-item px-5">
-											<a href="../../demo1/dist/apps/projects/list.html" class="menu-link px-5">
-												<span class="menu-text">My Projects</span>
-												<span class="menu-badge">
-													<span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-												</span>
-											</a>
-										</div> -->
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-
-                                <!--end::Menu item-->
-                                <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
-                                <!--end::Menu separator-->
-                                <!--begin::Menu item-->
-
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <!-- <div class="menu-item px-5 my-1">
-									<a href="../../demo1/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
-								</div> -->
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5">
-                                    <a href="logout.php" class="menu-link px-5">Sign Out</a>
-                                </div>
-                                <!--end::Menu item-->
+                                <div class="profile-role">Admin</div>
                             </div>
-                            <!--end::User account menu-->
-                            <!--end::Menu wrapper-->
                         </div>
                         <!--end::User menu-->
                         <!--begin::Header menu toggle-->

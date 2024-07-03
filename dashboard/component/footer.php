@@ -39,8 +39,59 @@
   </div>
   <!--end::App-->
 
+  <style>
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 80px;
+    right: 40px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-float {
+    position: fixed;
+    height: 40px;
+    bottom: 90px;
+    right: 70px;
+    color: #151D48;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.whatsapp-float .whatsapp-icon {
+    margin-top: 16px;
+    /* Adjust this to center the icon vertically */
+}
+  </style>
+
   <!--begin::Javascript-->
   <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const currentLocation = location.href;
+    const menuItem = document.querySelectorAll('.menu-link');
+    const menuLength = menuItem.length;
+    for (let i = 0; i < menuLength; i++) {
+        if (menuItem[i].href === currentLocation) {
+            menuItem[i].classList.add('active');
+        }
+    }
+});
+
 var hostUrl = "assets/";
   </script>
   <!--begin::Global Javascript Bundle(mandatory for all pages)-->

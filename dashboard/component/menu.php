@@ -46,159 +46,68 @@
                         <a class="menu-link" href="dash.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-house fa-bounce"></i>
+                                    <i class="fa-solid fa-chart-column"></i>
                                 </span>
                             </span>
-                            <span class="menu-title">Dashboard</span>
+                            <span class="menu-title">Status</span>
                         </a>
                     </div>
 
+                    <div class="menu-item">
+                        <a class="menu-link" href="admission.php">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
 
+                    <div class="menu-item">
+                        <a class="menu-link" href="invitation-letter.php">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-envelope-open-text"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Invitation Letter</span>
+                        </a>
+                    </div>
 
+                    <div class="menu-item">
+                        <a class="menu-link" href="pre-depart.php">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-person-walking-luggage"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Pre - Departure</span>
+                        </a>
+                    </div>
 
-
-                    <div class="menu-item pt-5">
-
-                        <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">Management</span>
+                    <div class="menu-item">
+                        <a class="menu-link" href="post-depart.php">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-plane-departure"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Post - Departure</span>
+                        </a>
+                    </div>
+                    <div style="position:absolute;bottom:0;">
+                        <div class="menu-item">
+                            <a class="menu-link" href="logout.php">
+                                <span class="menu-icon">
+                                    <span class="svg-icon svg-icon-2">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                    </span>
+                                </span>
+                                <span class="menu-title">Sign Out</span>
+                            </a>
                         </div>
-
                     </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link" href="r_table.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa fa-table" aria-hidden="true"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Table Data</span>
-                        </a>
-                    </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link" href="r_menu.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Menu</span>
-                        </a>
-                    </div>
-                    <?php  if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'radmin') {   ?>
-                    <div class="menu-item">
-                        <a class="menu-link" href="orderswait.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fas fa-hamburger"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Orders</span>
-                        </a>
-                    </div>
-                    <?php } ?>
-
-                    <!-- <?php // if (isset($_SESSION['usertype']) == 'table') { ?>
-                    <div class="menu-item">
-                        <a class="menu-link" href="order.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa fa-cutlery" aria-hidden="true"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Order</span>
-                        </a>
-                    </div>
-                    <?php // } ?> -->
-                    <div class="menu-item pt-5">
-
-                        <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">Users</span>
-                        </div>
-
-                    </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link" href="profile.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-user"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Profile</span>
-                        </a>
-                    </div>
-                    <?php  if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'admin') {   ?>
-                    <div class="menu-item">
-                        <a class="menu-link" href="users.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa-sharp fa-solid fa-users"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Users</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="new_radmin.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-user-plus"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Add Restaurent Admin</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="new_admin.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-user-tie"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Add Admin</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="u_log.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-file"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Login Logs</span>
-                        </a>
-                    </div>
-
-                    <?php } ?>
-                    <?php  if (isset($_SESSION['usertype']) && $_SESSION['usertype'] === 'radmin') {   ?>
-                    <div class="menu-item">
-                        <a class="menu-link" href="tableusers.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-table"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Table Users</span>
-                        </a>
-                    </div>
-
-
-                    <?php } ?>
-
-
-                    <div class="menu-item">
-                        <a class="menu-link" href="logout.php">
-                            <span class="menu-icon">
-                                <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                </span>
-                            </span>
-                            <span class="menu-title">Sign Out</span>
-                        </a>
-                    </div>
-
                 </div>
                 <!--end::Menu-->
             </div>

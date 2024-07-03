@@ -19,6 +19,10 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     align-items: center;
 }
 
+.mln {
+    margin-left: -40px;
+}
+
 .icon {
     position: relative;
     width: 80px;
@@ -31,10 +35,29 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     align-items: center;
 }
 
+.icont {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    background-color: #ff8a65;
+    /* Icon circle background color */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .icon-inner {
     position: relative;
     width: 50%;
     height: 50%;
+}
+
+.info-head {
+    color: #151D48;
+    font-weight: 600;
+    font-size: 32px;
+    margin-bottom: 2rem;
 }
 
 .info-text {
@@ -60,15 +83,37 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     font-size: 40px !important;
 }
 
+.icon-t {
+    color: white !important;
+    font-size: 30px !important;
+}
+
 @media (max-width: 600px) {
+    .text-float {
+        display: none !important;
+    }
+
+    .mln {
+        margin-left: 0px;
+    }
+
+    .icont {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .icon-t {
+        color: white !important;
+        font-size: 20px !important;
+    }
 
     .info {
         margin-right: 0 !important;
     }
 
     .icon {
-        width: 50px !important;
-        height: 50px !important;
+        width: 40px !important;
+        height: 40px !important;
     }
 
     .icon-i {
@@ -97,6 +142,10 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 1024px) {
+
+    .mln {
+        margin-left: -20px;
+    }
 
     .icon {
         width: 60px !important;
@@ -140,7 +189,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
                 <li class="breadcrumb-item">
                     <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                        Status </h1>
+                        Pre - Departure</h1>
                 </li>
 
                 <!-- <li class="breadcrumb-item text-muted"><img src="assets/media/stock/etc/live.png" width="60px"> </li> -->
@@ -158,7 +207,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-muted">Status </li>
+                <li class="breadcrumb-item text-muted">Pre Departure</li>
 
                 <!--end::Item-->
             </ul>
@@ -359,122 +408,28 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
             if ($_SESSION['usertype'] == 'radmin') {
 
             ?>
-        <div class="row g-3 g-xl-10 mb-3 mb-xl-3">
+        <div class="row g-3 g-xl-10 mb-3 me-6 m mb-xl-3">
 
-            <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
+                <div class="col-12 mt-10 mb-4" style="border:1px solid black;">
+                </div>
+
+                <div class="poppins info-head">
+                    Session Details:
+                </div>
                 <div style="background-color:#FFF4DE;"
-                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 me-6 mb-3">
+                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
-                        <div class="col-3">
-                            <div class="icon-container">
-                                <div class="icon">
-                                    <div class="icon-circle">
-                                        <i class="icon-i fa-regular fa-file-lines"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9 px-4">
+                        <div class="col-10 mx-4">
                             <div class="poppins info-text">
-                                Application
-                                Submitted
-                            </div>
-                            <div class="info-subtext">(DATE
-                                Of
-                                Submission)
-                            </div>
-                            <div class="info-status">(Approved)
+                                Session Has Not been Scheduled
                             </div>
                         </div>
                     </div>
                     <!--end::Label-->
                 </div>
             </div>
-            <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#AEAFF7;"
-                    class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
-                    <!--begin::Label-->
-                    <div class="row" style="align-items:center;">
-                        <div class="col-3">
-                            <div class="icon-container">
-                                <div class="icon" style="background-color:#5D5FEF;">
-                                    <div class="icon-circle">
-                                        <i class="icon-i fa-solid fa-envelope-open-text"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9 px-4">
-                            <div class="poppins info-text">Invitation Letter
-                            </div>
-                            <div class="info-subtext">(DATE Of
-                                Submission)
-                            </div>
-                            <div class="info-status">(Inprocess)
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Label-->
-                </div>
-            </div>
-            <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#AEAFF7;"
-                    class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
-                    <!--begin::Label-->
-                    <div class="row" style="align-items:center;">
-                        <div class="col-3">
-                            <div class="icon-container">
-                                <div class="icon" style="background-color:#5D5FEF;">
-                                    <div class="icon-circle">
-                                        <i class="icon-i fa-regular fa-envelope"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9 px-4">
-                            <div class="poppins info-text">Offer Letter
-                            </div>
-                            <div class="info-subtext">(DATE Of
-                                Submission)
-                            </div>
-                            <div class="info-status">(Inprocess)
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Label-->
-                </div>
-            </div>
-            <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#FFF4DE;"
-                    class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
-                    <!--begin::Label-->
-                    <div class="row" style="align-items:center;">
-                        <div class="col-3">
-                            <div class="icon-container">
-                                <div class="icon">
-                                    <div class="icon-circle">
-                                        <i class="icon-i fa-solid fa-plane-departure"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9 px-4">
-                            <div class="poppins info-text">Pre -
-                                Departure
-                            </div>
-                            <div class="info-subtext">(DATE Of
-                                Session)
-                            </div>
-                            <div class="info-status">(Rejected)
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Label-->
-                </div>
-            </div>
-
-
 
         </div>
 
@@ -483,12 +438,18 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
     </div>
 
-</div>
 
-<!-- Whatsapp Floating Button -->
-<a href="https://wa.me/7223859729" class="whatsapp-float" target="_blank">
-    <i style="color:white;font-size:35px;" class="fa-brands fa-whatsapp"></i>
-</a>
+</div>
+<!-- Note section -->
+<!-- <div class="d-flex fs-4 px-8 text-center"
+    style="justify-content:center;align-items:center;font-weight:600;margin-top:25rem;">
+    <p>
+        Note: For Pre Departure Session Student are required to reach the location, Dostorinspration is not liable for
+        any
+        tickets or transport help
+    </p>
+</div> -->
+
 
 
 <script>
