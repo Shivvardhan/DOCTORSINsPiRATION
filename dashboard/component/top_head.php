@@ -52,7 +52,7 @@
                                 data-kt-menu-placement="bottom-start"
                                 class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2 ">
                                 <!--begin:Menu link-->
-                                <?php if (isset($_SESSION['usertype']) && $_SESSION['usertype'] == "admin") { ?>
+                                <!-- <?php if (isset($_SESSION['usertype']) && $_SESSION['usertype'] == "admin") { ?>
                                 <span class="menu-link m-5">
                                     <span class="menu-title" style="width:50px;">Total Times Users Logged Till Now
                                         &nbsp;<span id="todaylogged"></span></span>
@@ -63,8 +63,8 @@
                                 </span>
 
 
-                                <?php } ?>
-                                <span class="menu-link m-5">
+                                <?php } ?> -->
+                                <!-- <span class="menu-link m-5">
                                     <span class="menu-title" style="width: 250px;"><i
                                             class="fa-solid fa-clock fa-bounce"></i>&nbsp; <span
                                             id="currentdateetime"></span></span>
@@ -73,7 +73,7 @@
 
 
 
-                                </span>
+                                </span> -->
 
 
 
@@ -264,11 +264,11 @@
                             </a>
                         </div>
                         <div class="profile-component">
-                            <img src="https://s3-alpha-sig.figma.com/img/1b73/04b2/85d08c0f8b29f8fc61ad6621680532e7?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=N7CI4dlKPOLlzK93JjAN1R1GPQx2~BJpw9nTdwAnqXgAsS74TPjqOExGXlieGV02xbC3iwYDuJROxDhho6IOYYTyS97aMBNRE4maGgTcW~nDrPmswQv4jKuSskrAxG0LkaE4~f~bLo91hIK~P3UVk-swqLRfaSOQwQg026ta635X022bAR~n1uXIaC8WeUtQqy9AFdf~BBHBe5tEKVUOcEctipFyHHqi~G70VLkAM3Fp6VPhQ1U8edRF0OHWsueMW9uafEFWkvQrgInESGLB~yeKVoHsOSitd0aRaQ0QGVQc~3kjaiO3p6Edvhdqy2~NAATOJJ0wxpsQZJOfHt49Ng__"
+                            <img src="https://cdn-icons-png.flaticon.com/512/5987/5987424.png"
                                 alt="Profile Image" class="profile-image">
                             <div class="profile-info">
                                 <div class="profile-name">
-                                    Musfiq
+                                    <?php echo $_SESSION['fname'] ." ". $_SESSION['lname']?>
                                 </div>
                                 <div class="profile-role">Admin</div>
                             </div>
