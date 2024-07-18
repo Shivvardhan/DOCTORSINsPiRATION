@@ -2,7 +2,7 @@
 $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
-$db_name = 'systemvista';
+$db_name = 'doctor_inspiration';
 
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
