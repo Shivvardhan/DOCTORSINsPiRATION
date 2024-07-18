@@ -43,18 +43,23 @@
 
 
                     <div class="menu-item">
-                        <a class="menu-link" href="dash.php">
+                        <a class="menu-link <?php if($mode['register'] !='paid'){
+                            echo "disabled";
+                        }; ?>" href="dash.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
                                     <i class="fa-solid fa-chart-column"></i>
                                 </span>
                             </span>
-                            <span class="menu-title">Status</span>
+                            <span class="menu-title">Status
+                            </span>
                         </a>
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link" href="admission.php">
+                        <a class="menu-link <?php if($mode['register'] !='paid'){
+                            echo "disabled";
+                        }; ?>" href="admission.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
                                     <i class="fa-solid fa-building-columns"></i>
@@ -65,7 +70,9 @@
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link" href="invitation-letter.php">
+                        <a class="menu-link <?php if($mode['application'] !='paid'){
+                            echo "disabled";
+                        }; ?>" tabindex="-1" aria-disabled="true" href="invitation-letter.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
                                     <i class="fa-solid fa-envelope-open-text"></i>
@@ -76,7 +83,9 @@
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link" href="pre-depart.php">
+                        <a class="menu-link <?php if($mode['invitation_letter'] !='paid'){
+                            echo "disabled";
+                        }; ?>" href="pre-depart.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
                                     <i class="fa-solid fa-person-walking-luggage"></i>
@@ -87,7 +96,9 @@
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link" href="post-depart.php">
+                        <a class="menu-link <?php if($mode['pre_depart'] !='paid'){
+                            echo "disabled";
+                        }; ?>" href="post-depart.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
                                     <i class="fa-solid fa-plane-departure"></i>
@@ -115,7 +126,7 @@
         </div>
         <!--end::sidebar menu-->
         <!--begin::Footer-->
-       
+
         <!--end::Footer-->
     </div>
     <!--end::Sidebar-->

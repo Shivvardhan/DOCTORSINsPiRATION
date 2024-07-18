@@ -1,5 +1,12 @@
 <?php
 require "./component/d_head.php";
+//Code for checking the mode status
+if($mode['invitation_letter']!='paid'){
+    echo '<script type="text/javascript">';
+    echo 'window.location.href = "dash.php";';
+    echo '</script>';
+    exit();
+}
 $stmt = $conn->prepare("SELECT l_token FROM `users` WHERE `username` = ?");
 $stmt->bind_param('s', $_SESSION['username']);
 $stmt->execute();
@@ -25,7 +32,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     position: relative;
     width: 80px;
     height: 80px;
-    background-color: #ff8a65;
+    background-color: #166572;
     /* Icon circle background color */
     border-radius: 50%;
     display: flex;
@@ -62,6 +69,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     color: #151D48;
     font-weight: 600;
     font-size: 24px;
+}
+
+.info-text-a {
+    color: #151D48;
+    font-weight: 600;
+    font-size: 21px;
 }
 
 .info-subtext {
@@ -125,6 +138,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         font-size: 16px;
     }
 
+    .info-text-a {
+        color: #151D48;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
     .info-subtext {
         color: #425166;
         font-weight: 500;
@@ -159,6 +178,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         color: #151D48;
         font-weight: 600;
         font-size: 18px !important;
+    }
+
+    .info-text-a {
+        color: #151D48;
+        font-weight: 600;
+        font-size: 16px !important;
     }
 
     .info-subtext {
@@ -225,14 +250,44 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     <div id="kt_app_content_container" class="app-container container-fluid">
         <div class="row g-3 g-xl-10 mb-3 me-6 m mb-xl-3">
 
-            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12">
+                <div style="background-color:#DFE7E8;"
+                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
+                    <!--begin::Label-->
+                    <div class="row" style="align-items:center;">
+                        <div class="col-2">
+                            <div class="icon-container">
+                                <div class="icon">
+                                    <div class="icon-circle">
+                                        <i class="icon-i fa-regular fa-file-lines"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8 mln">
+                            <div class="poppins info-text">
+                                Visa
+                            </div>
+                            <div class="info-subtext">(DATE
+                                Of
+                                Submission)
+                            </div>
+                            <div class="info-status">(Approved)
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Label-->
+                </div>
                 <div class="col-12 mt-10 mb-4" style="border:1px solid black;">
                 </div>
+            </div>
+
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
 
                 <div class="poppins info-head">
                     Session Details:
                 </div>
-                <div style="background-color:#FFF4DE;"
+                <div style="background-color:#DFE7E8;"
                     class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
@@ -246,22 +301,76 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 </div>
             </div>
 
+            <?php if("staff"=="filled_data") {?>
+            <!-- After Session details are updated by staff account -->
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
+
+                <div class="poppins info-head">
+                    Session Details:
+                </div>
+                <div style="background-color:#DFE7E8;"
+                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
+                    <!--begin::Label-->
+                    <div class="row" style="align-items:center;">
+                        <div class="col-5 mx-4">
+                            <div class="poppins info-text">
+                                Session Date : 19/02/1256
+                            </div>
+                        </div>
+                        <div class="col-5 mx-4">
+                            <div class="poppins info-text">
+                                Session Time: 11:00 am
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Label-->
+                </div>
+            </div>
+
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mt-2">
+                <div style="background-color:#DFE7E8;"
+                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 ">
+                    <!--begin::Label-->
+                    <div class="row" style="align-items:center;">
+                        <div class="poppins info-text mb-3 ms-4">
+                            Session Address:
+                        </div>
+                        <div class="col-2 mln">
+
+                            <div class="icon-container">
+                                <div class="icon" style="height:55px;width:55px;">
+                                    <div class="icon-circle">
+                                        <i class="icon-i fa-regular fa-file-lines"
+                                            style="font-size:20px !important;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-10 mln">
+                            <div class="poppins info-text-a">
+                                Address : 1234 Elm Street Springfield, IL 62704 United States
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Label-->
+                </div>
+            </div>
+            <?php };?>
         </div>
 
     </div>
 
 
 </div>
-<!-- Note section -->
-<!-- <div class="d-flex fs-4 px-8 text-center"
-    style="justify-content:center;align-items:center;font-weight:600;margin-top:25rem;">
-    <p>
-        Note: For Pre Departure Session Student are required to reach the location, Dostorinspration is not liable for
-        any
-        tickets or transport help
-    </p>
-</div> -->
 
+<?php if("staff"=="filled_data") {?>
+<!-- Note section -->
+<div class="d-flex fs-4 px-8 text-center" style="justify-content:center;align-items:center;font-weight:600;">
+    <p class="info-text" style="color:#18618E;">
+        All Students and Parents Are Welcomed to Attend the Session
+    </p>
+</div>
+<?php };?>
 
 <?php require "./component/footer.php";
 } else {

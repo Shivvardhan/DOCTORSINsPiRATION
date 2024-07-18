@@ -1,5 +1,12 @@
 <?php
 require "./component/d_head.php";
+//Code for checking the mode status
+if($mode['pre_depart']!='paid'){
+    echo '<script type="text/javascript">';
+    echo 'window.location.href = "dash.php";';
+    echo '</script>';
+    exit();
+}
 $stmt = $conn->prepare("SELECT l_token FROM `users` WHERE `username` = ?");
 $stmt->bind_param('s', $_SESSION['username']);
 $stmt->execute();

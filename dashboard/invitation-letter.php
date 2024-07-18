@@ -1,5 +1,12 @@
 <?php
 require "./component/d_head.php";
+//Code for checking the mode status
+if($mode['application']!='paid'){
+    echo '<script type="text/javascript">';
+    echo 'window.location.href = "dash.php";';
+    echo '</script>';
+    exit();
+}
 $stmt = $conn->prepare("SELECT l_token FROM `users` WHERE `username` = ?");
 $stmt->bind_param('s', $_SESSION['username']);
 $stmt->execute();
@@ -11,6 +18,26 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 ?>
 
 <style>
+.form-group label {
+    font-weight: bold;
+    color: #1d2951;
+    font-size: 1.3rem;
+}
+
+.submit-btn {
+    background-color: #18618E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #164662;
+    color: white;
+}
+
 .icon-container {
     display: flex;
     justify-content: center;
@@ -25,7 +52,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     position: relative;
     width: 80px;
     height: 80px;
-    background-color: #ff8a65;
+    background-color: #166572;
     /* Icon circle background color */
     border-radius: 50%;
     display: flex;
@@ -57,6 +84,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     font-size: 24px;
 }
 
+.info-text-a {
+    color: #151D48;
+    font-weight: 600;
+    font-size: 21px;
+}
+
 .info-subtext {
     color: #425166;
     font-weight: 500;
@@ -78,6 +111,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     color: white !important;
     font-size: 30px !important;
 }
+
 
 @media (max-width: 600px) {
     .text-float {
@@ -118,6 +152,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         font-size: 16px;
     }
 
+    .info-text-a {
+        color: #151D48;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
     .info-subtext {
         color: #425166;
         font-weight: 500;
@@ -152,6 +192,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         color: #151D48;
         font-weight: 600;
         font-size: 18px !important;
+    }
+
+    .info-text-a {
+        color: #151D48;
+        font-weight: 600;
+        font-size: 16px !important;
     }
 
     .info-subtext {
@@ -220,7 +266,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         <div class="row g-3 g-xl-10 mb-3 me-6 m mb-xl-3">
 
             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
-                <div style="background-color:#FFF4DE;"
+                <div style="background-color:#DFE7E8;"
                     class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
@@ -267,11 +313,125 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                     </div>
                 </div>
             </div>
+
+
+            <!-- if payment is paid then shown only -->
+            <?php 
+            //Code for checking the mode status
+            if($mode['invitation_letter']=='paid'){
+                {
+            }
+            ?>
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12">
+                <div style="background-color:#DFE7E8;"
+                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 ">
+                    <!--begin::Label-->
+                    <div class="row" style="align-items:center;">
+                        <div class="col-2">
+                            <div class="icon-container">
+                                <div class="icon" style="height:55px;width:55px;">
+                                    <div class="icon-circle">
+                                        <i class="icon-i fa-regular fa-file-lines"
+                                            style="font-size:20px !important;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-10 mln">
+                            <div class="poppins info-text-a">
+                                Address : 1234 Elm Street Springfield, IL 62704 United States
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Label-->
+                </div>
+            </div>
+
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3 mt-3">
+                <div style="background-color:#DFE7E8;"
+                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
+                    <!--begin::Label-->
+                    <?php
+                    $uid = $_SESSION['uid'];
+                    $sql = "SELECT COUNT(uid) as submit FROM courier WHERE uid = ?";
+                            
+                    if ($stmt = $conn->prepare($sql)) {
+                        $stmt->bind_param('i', $uid); 
+                        $stmt->execute();
+                        $stmt->bind_result($submit);
+                        if ($stmt->fetch()) {
+                            if ($submit >= 1) { ?>
+
+                    <div class="row text-center" style="align-items:center;">
+                        <div class="poppins info-text-a">
+                            Courier Tracking Details Already Filled.
+                        </div>
+                    </div>
+
+                    <?php
+                    } else { ?>
+                    <div class="row" style="align-items:center;">
+                        <form action="#" method="POST">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="courierBy">Courier By:</label>
+                                    <input type="text" class="form-control" id="courierBy" name="courierBy" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="trackingId">Tracking ID:</label>
+                                    <input type="text" class="form-control" id="trackingId" name="trackingId" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="dateOfCourier">Date of Courier:</label>
+                                    <input type="date" class="form-control" id="dateOfCourier" name="dateOfCourier"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-8">
+                                <button style="width:30%;" type="submit" name="courier_submit"
+                                    class="btn submit-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <?php
+                    }} else {
+                        echo 'Fetch Error: ' . $stmt->error;
+                    }
+                    $stmt->close();
+                    } else {
+                    echo 'Prepare Error: ' . $conn->error;
+                    }
+                    ?>
+                </div>
+            </div>
+
+            <?php };?>
         </div>
 
     </div>
 
+    <?php
+if (isset($_POST['courier_submit'])) {
+    // Retrieve form data
+    $uid = $_SESSION['uid'];
+    $courierBy = $_POST['courierBy'];
+    $trackingId = $_POST['trackingId'];
+    $dateOfCourier = $_POST['dateOfCourier'];
 
+   // Insert data into the database
+   $sql = "INSERT INTO courier (uid, courier_by, tracking_id, date) VALUES (?, ?, ?, ?)";
+   if ($stmt = $conn->prepare($sql)) {
+       $stmt->bind_param('ssss', $uid, $courierBy, $trackingId, $dateOfCourier);
+       $stmt->execute();
+       echo '<script type="text/javascript">';
+       echo 'window.location.href = "invitation-letter.php";';
+       echo '</script>';
+       $stmt->close();
+   } else {
+       echo 'Error: ' . $conn->error;
+   }
+}
+?>
 </div>
 <!-- Note section -->
 <div class="d-flex fs-4 px-8 text-center"
@@ -283,8 +443,13 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     </p>
 </div>
 
-
-<!-- Whatsapp Floating Button -->
+<?php 
+//Code for checking the mode status
+if($mode['invitation_letter']!='paid'){
+    {
+}
+?>
+<!-- Payment Floating Button -->
 <div class=" d-flex">
     <div class="text-float px-12" style="background-color:#AEAFF7;font-size:20px;">
         Pay Fees for Further Processing
@@ -293,7 +458,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         <i style="color:white;font-size:25px;" class="fa-solid fa-money-bill-wave"></i>
     </a>
 </div>
-
+<?php };?>
 <?php require "./component/footer.php";
 } else {
     echo "<script>window.location.href = 'index.php'; </script>";

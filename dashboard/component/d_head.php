@@ -50,6 +50,13 @@ $stmt = $conn->prepare("SELECT l_token FROM `users` WHERE `username` = ?");
         border: 1px solid #5D5FEF;
     }
 
+    .menu-link.disabled {
+        pointer-events: none !important;
+        opacity: 0.4 !important;
+        color: #6c757d !important;
+
+    }
+
     .profile-component {
         display: flex;
         align-items: center;
