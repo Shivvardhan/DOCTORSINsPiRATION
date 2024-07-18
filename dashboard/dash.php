@@ -8,8 +8,6 @@ $user = $result->fetch_assoc();
 if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']) && session_status() === PHP_SESSION_ACTIVE && $_SESSION['usertype']) {
 
     require "./component/menu.php";
-    require "chart.php";
-    require "function.php";
 ?>
 
     <style>
@@ -433,71 +431,18 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
             <?php } ?>
             <!-- for radmin analyticc end -->
 
+
         </div>
 
     </div>
 
-    <!-- Whatsapp Floating Button -->
-    <a href="https://wa.me/7223859729" class="whatsapp-float" target="_blank">
-        <i style="color:white;font-size:35px;" class="fa-brands fa-whatsapp"></i>
-    </a>
 
+</div>
 
-    <script>
-        $(document).ready(function() {
-            // Make AJAX request to retrieve data
-
-            $.ajax({
-                url: 'phpdata/live_a_u.php',
-                dataType: 'json',
-                success: function(data) {
-                    // Update data placeholders
-                    $('#totalradmins').text(data.totalradmin);
-                    $('#totaladmin').text(data.totaladmin);
-                    $('#totaltacc').text(data.totaltacc);
-                    $('#notlogged').text(data.notlogged);
-                    $('#todayordercount').text(data.todayordercount);
-                    $('#totalorders').text(data.totalorders);
-                    $('#totalmenuitems').text(data.totalmenuitems);
-                    $('#ttotalmenuitems').text(data.ttotalmenuitems);
-                    $('#utable').text(data.utable);
-                    $('#rmenu').text(data.rmenu);
-                    $('#todayorderu').text(data.todayorderu);
-                    $('#todayallorderu').text(data.todayallorderu);
-
-
-
-
-
-
-                }
-            });
-
-            // Refresh data every 5 seconds
-            setInterval(function() {
-                $.ajax({
-                    url: 'phpdata/live_a_u.php',
-                    dataType: 'json',
-                    success: function(data) {
-                        // Update data placeholders
-                        $('#totalradmins').text(data.totalradmin);
-                        $('#totaladmin').text(data.totaladmin);
-                        $('#totaltacc').text(data.totaltacc);
-                        $('#notlogged').text(data.notlogged);
-                        $('#todayordercount').text(data.todayordercount);
-                        $('#totalorders').text(data.totalorders);
-                        $('#totalmenuitems').text(data.totalmenuitems);
-                        $('#ttotalmenuitems').text(data.ttotalmenuitems);
-                        $('#utable').text(data.utable);
-                        $('#rmenu').text(data.rmenu);
-                        $('#todayorderu').text(data.todayorderu);
-                        $('#todayallorderu').text(data.todayallorderu);
-
-                    }
-                });
-            }, 5000);
-        });
-    </script>
+<!-- Whatsapp Floating Button -->
+<a href="https://wa.me/7223859729" class="whatsapp-float" target="_blank">
+    <i style="color:white;font-size:35px;" class="fa-brands fa-whatsapp"></i>
+</a>
 
 <?php require "./component/footer.php";
 } else {
