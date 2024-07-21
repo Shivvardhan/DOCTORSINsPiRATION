@@ -228,13 +228,13 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         <div class="row g-3 g-xl-10 mb-3 me-6 m mb-xl-3">
 
             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
-                <div style="background-color:#FFF4DE;"
+                <div style="background-color:#DFE7E8;"
                     class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
                         <div class="col-2">
                             <div class="icon-container">
-                                <div class="icon">
+                                <div class="icon" style="background-color:#166572;">
                                     <div class="icon-circle">
                                         <i class="icon-i fa-regular fa-file-lines"></i>
                                     </div>
@@ -263,7 +263,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
             <div class="d-flex" style="align-items:center;">
                 <div class="icon-container" style="justify-content:left;">
-                    <div class="icont" style="background-color:#5D5FEF;">
+                    <div class="icont" style="background-color:#18618E;">
                         <div class="icon-circle">
                             <i class="icon-t fa-solid fa-download"></i>
                         </div>
@@ -278,7 +278,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
             <div class="d-flex" style="align-items:center;">
                 <div class="icon-container" style="justify-content:left;">
-                    <div class="icont" style="background-color:#5D5FEF;">
+                    <div class="icont" style="background-color:#18618E;">
                         <div class="icon-circle">
                             <i class="icon-t fa-brands fa-whatsapp"></i>
                         </div>
@@ -299,10 +299,10 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 </div>
 <!-- Whatsapp Floating Button -->
 <div class=" d-flex">
-    <div class="text-float px-12" style="background-color:#AEAFF7;font-size:20px;">
+    <div class="text-float px-12" style="background-color:#A4CBE3;font-size:20px;">
         Pay Fees for Access Invitation Letter
     </div>
-    <a href="https://wa.me/7223859729" style="background-color:#5D5FEF;" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/7223859729" style="background-color:#18618E;" class="whatsapp-float" target="_blank">
         <i style="color:white;font-size:25px;" class="fa-solid fa-money-bill-wave"></i>
     </a>
 </div>

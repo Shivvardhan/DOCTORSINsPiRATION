@@ -323,13 +323,13 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         <div class="row g-3 g-xl-10 mb-3 mb-xl-3">
 
             <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#FFF4DE;"
+                <div style="background-color:#DFE7E8;"
                     class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 me-6 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
                         <div class="col-3">
                             <div class="icon-container">
-                                <div class="icon">
+                                <div class="icon" style="background-color:#166572;">
                                     <div class="icon-circle">
                                         <i class="icon-i fa-regular fa-file-lines"></i>
                                     </div>
@@ -353,13 +353,13 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 </div>
             </div>
             <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#AEAFF7;"
+                <div style="background-color:#A4CBE3;"
                     class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
                         <div class="col-3">
                             <div class="icon-container">
-                                <div class="icon" style="background-color:#5D5FEF;">
+                                <div class="icon" style="background-color:#18618E;">
                                     <div class="icon-circle">
                                         <i class="icon-i fa-solid fa-envelope-open-text"></i>
                                     </div>
@@ -380,13 +380,13 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 </div>
             </div>
             <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#AEAFF7;"
+                <div style="background-color:#A4CBE3;"
                     class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
                         <div class="col-3">
                             <div class="icon-container">
-                                <div class="icon" style="background-color:#5D5FEF;">
+                                <div class="icon" style="background-color:#18618E;">
                                     <div class="icon-circle">
                                         <i class="icon-i fa-regular fa-envelope"></i>
                                     </div>
@@ -407,13 +407,13 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 </div>
             </div>
             <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#FFF4DE;"
+                <div style="background-color:#DFE7E8;"
                     class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
                         <div class="col-3">
                             <div class="icon-container">
-                                <div class="icon">
+                                <div class="icon" style="background-color:#166572;">
                                     <div class="icon-circle">
                                         <i class="icon-i fa-solid fa-plane-departure"></i>
                                     </div>

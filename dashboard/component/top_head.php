@@ -2,7 +2,7 @@
     <!--begin::Page-->
     <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
         <!--begin::Header-->
-        <div id="kt_app_header" class="app-header">
+        <div id="kt_app_header" class="app-header" style="background-color:#DFE7E8;">
             <!--begin::Header container-->
             <div class="app-container container-fluid d-flex align-items-stretch justify-content-between"
                 id="kt_app_header_container">
@@ -26,13 +26,6 @@
                 </div>
                 <!--end::sidebar mobile toggle-->
                 <!--begin::Mobile logo-->
-                <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-                    <a href="dash.php" class="d-lg-none">
-                        <img alt="Logo" src="assets/media/logos/default-small.svg" class="theme-light-show h-30px" />
-                        <img alt="Logo" src="assets/media/logos/default-small-dark.svg"
-                            class="theme-dark-show h-30px" />
-                    </a>
-                </div>
                 <!--end::Mobile logo-->
                 <!--begin::Header wrapper-->
                 <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
@@ -52,7 +45,7 @@
                                 data-kt-menu-placement="bottom-start"
                                 class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2 ">
                                 <!--begin:Menu link-->
-                                <!-- <?php if (isset($_SESSION['usertype']) && $_SESSION['usertype'] == "admin") { ?>
+                                <?php if (isset($_SESSION['usertype']) && $_SESSION['usertype'] == "admin") { ?>
                                 <span class="menu-link m-5">
                                     <span class="menu-title" style="width:50px;">Total Times Users Logged Till Now
                                         &nbsp;<span id="todaylogged"></span></span>
@@ -63,23 +56,10 @@
                                 </span>
 
 
-                                <?php } ?> -->
-                                <!-- <span class="menu-link m-5">
-                                    <span class="menu-title" style="width: 250px;"><i
-                                            class="fa-solid fa-clock fa-bounce"></i>&nbsp; <span
-                                            id="currentdateetime"></span></span>
-
-
-
-
-
-                                </span> -->
-
-
-
-                                <!--end:Menu link-->
-                                <!--begin:Menu sub-->
-                                <!--end:Menu sub-->
+                                <?php } ?>
+                                <div class="poppins" style="color: #151D48;font-weight: 700;font-size: 34px;">
+                                    Dashboard
+                                </div>
                             </div>
 
                         </div>
@@ -261,8 +241,8 @@
                             </a>
                         </div>
                         <div class="profile-component">
-                            <img src="https://cdn-icons-png.flaticon.com/512/5987/5987424.png"
-                                alt="Profile Image" class="profile-image">
+                            <img src="https://cdn-icons-png.flaticon.com/512/5987/5987424.png" alt="Profile Image"
+                                class="profile-image">
                             <div class="profile-info">
                                 <div class="profile-name">
                                     <?php echo $_SESSION['fname'] ." ". $_SESSION['lname']?>

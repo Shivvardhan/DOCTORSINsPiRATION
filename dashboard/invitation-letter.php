@@ -301,7 +301,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
             <div class="d-flex" style="align-items:center;">
                 <div class="icon-container" style="justify-content:left;">
-                    <div class="icont" style="background-color:#5D5FEF;">
+                    <div class="icont" style="background-color:#18618E;">
                         <div class="icon-circle">
                             <i class="icon-t fa-solid fa-download"></i>
                         </div>
