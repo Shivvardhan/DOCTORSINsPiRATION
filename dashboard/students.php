@@ -187,7 +187,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
                 <li class="breadcrumb-item">
                     <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                        Status </h1>
+                        Students</h1>
                 </li>
 
                 <!-- <li class="breadcrumb-item text-muted"><img src="assets/media/stock/etc/live.png" width="60px"> </li> -->
@@ -205,7 +205,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-muted">Status </li>
+                <li class="breadcrumb-item text-muted">Students</li>
 
                 <!--end::Item-->
             </ul>
@@ -224,21 +224,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
     <div id="kt_app_content_container" class="app-container container-fluid">
 
-        <?php
-            if ($_SESSION['usertype'] == 'admin') {
-                // Prepare and execute the SQL query
-                $stmt = $conn->prepare("SELECT * FROM payment_status WHERE user_id = ?");
-                $stmt->bind_param("i", $_SESSION['uid']);
-                $stmt->execute();
-
-                // Fetch the result
-                $result = $stmt->get_result();
-                if ($row = $result->fetch_assoc()) {
-
-
-            ?>
-
-        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
+        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-8 mb-xl-6">
             <div style="background-color:#DFE7E8;"
                 class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
                 <!--begin::Label-->
@@ -262,73 +248,30 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 </div>
                 <!--end::Label-->
             </div>
+            <div class="col-12 mt-10 mb-4" style="border:1px solid black;">
+            </div>
         </div>
 
-
-
-
-
-        <!-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-
-                    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-md-5 mb-xl-10">
-                        <div class="card card-bordered">
-                            <div class="card-body">
-                                <div id="kt_docs_google_chart_column" style="width:100%; margin: 35px auto;"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-md-5 mb-xl-10">
-
-                        <div class="card card-bordered">
-                            <div class="card-body">
-                                <div id="kt_docs_google_chart_line" style="  width:100%;margin: 35px auto;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> -->
-        <?php
-                }
-            }
-
-            ?>
-
-
-
-
-        <!-- for radmin analyticc start -->
-
-        <?php
-            if ($_SESSION['usertype'] == 'radmin') {
-
-            ?>
-        <div class="row g-3 g-xl-10 mb-3 mb-xl-3">
-
+        <div class="row mt-12">
             <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#DFE7E8;"
-                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 me-6 mb-3">
+                <div style="background-color:#A4CBE3;"
+                    class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
                         <div class="col-3">
                             <div class="icon-container">
-                                <div class="icon" style="background-color:#166572;">
+                                <div class="icon" style="background-color:#18618E;">
                                     <div class="icon-circle">
-                                        <i class="icon-i fa-regular fa-file-lines"></i>
+                                        <i class="icon-i fa-solid fa-user-large"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-9 px-4">
                             <div class="poppins info-text">
-                                Application
-                                Submitted
+                                New Registrations
                             </div>
-                            <div class="info-subtext">(DATE
-                                Of
-                                Submission)
-                            </div>
-                            <div class="info-status">(Approved)
+                            <div class="info-subtext">(1200)
                             </div>
                         </div>
                     </div>
@@ -350,80 +293,17 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                             </div>
                         </div>
                         <div class="col-9 px-4">
-                            <div class="poppins info-text">Invitation Letter
+                            <div class="poppins info-text">
+                                Admission In Process
                             </div>
-                            <div class="info-subtext">(DATE Of
-                                Submission)
-                            </div>
-                            <div class="info-status">(Inprocess)
+                            <div class="info-subtext">(1200)
                             </div>
                         </div>
                     </div>
                     <!--end::Label-->
                 </div>
             </div>
-            <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#A4CBE3;"
-                    class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
-                    <!--begin::Label-->
-                    <div class="row" style="align-items:center;">
-                        <div class="col-3">
-                            <div class="icon-container">
-                                <div class="icon" style="background-color:#18618E;">
-                                    <div class="icon-circle">
-                                        <i class="icon-i fa-regular fa-envelope"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9 px-4">
-                            <div class="poppins info-text">Offer Letter
-                            </div>
-                            <div class="info-subtext">(DATE Of
-                                Submission)
-                            </div>
-                            <div class="info-status">(Inprocess)
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Label-->
-                </div>
-            </div>
-            <div class="col-md-8 col-lg-6 col-xl-6 col-xxl-6 mb-md-6 mb-xl-3">
-                <div style="background-color:#DFE7E8;"
-                    class=" border border-gray-300 border-dashed info rounded min-w-125px py-10 px-4 me-6 mb-3">
-                    <!--begin::Label-->
-                    <div class="row" style="align-items:center;">
-                        <div class="col-3">
-                            <div class="icon-container">
-                                <div class="icon" style="background-color:#166572;">
-                                    <div class="icon-circle">
-                                        <i class="icon-i fa-solid fa-plane-departure"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9 px-4">
-                            <div class="poppins info-text">Pre -
-                                Departure
-                            </div>
-                            <div class="info-subtext">(DATE Of
-                                Session)
-                            </div>
-                            <div class="info-status">(Rejected)
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Label-->
-                </div>
-            </div>
-
-
-
         </div>
-
-        <?php } ?>
-        <!-- for radmin analyticc end -->
 
 
     </div>
@@ -433,16 +313,15 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
 </div>
 
-<?php
-            if ($_SESSION['usertype'] == 'radmin') {
-
-            ?>
-<!-- Whatsapp Floating Button -->
-<a href="https://wa.me/7223859729" class="whatsapp-float" target="_blank">
-    <i style="color:white;font-size:35px;" class="fa-brands fa-whatsapp"></i>
-</a>
-
-<?php }?>
+<script>
+function toggleDropdown(event) {
+    event.preventDefault();
+    const dropdownMenu = document.getElementById('sub-1');
+    if (dropdownMenu) {
+        dropdownMenu.classList.toggle('show');
+    }
+}
+</script>
 <?php require "./component/footer.php";
 } else {
     echo "<script>window.location.href = 'index.php'; </script>";

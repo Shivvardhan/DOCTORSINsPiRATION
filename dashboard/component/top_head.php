@@ -46,14 +46,7 @@
                                 class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2 ">
                                 <!--begin:Menu link-->
                                 <?php if (isset($_SESSION['usertype']) && $_SESSION['usertype'] == "admin") { ?>
-                                <span class="menu-link m-5">
-                                    <span class="menu-title" style="width:50px;">Total Times Users Logged Till Now
-                                        &nbsp;<span id="todaylogged"></span></span>
 
-
-
-
-                                </span>
 
 
                                 <?php } ?>

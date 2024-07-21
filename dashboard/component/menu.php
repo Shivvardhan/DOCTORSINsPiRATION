@@ -38,9 +38,103 @@
                 data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
                 data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px">
                 <!--begin::Menu-->
+
+                <?php if($_SESSION['usertype']=="admin"){
+                    ?>
                 <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold px-3" id="#kt_app_sidebar_menu"
                     data-kt-menu="true" data-kt-menu-expand="false">
 
+                    <div class="menu-item">
+                        <a class="menu-link" href="dash.php">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-chart-column"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Status
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link " href="students.php" onclick="toggleDropdown(event)">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-people-group"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Students</span>
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-sort-down"></i>
+                                </span>
+                            </span>
+                        </a>
+                        <div class="sub" id="sub-1" style="margin-left:0.8rem;">
+                            <div class="menu-item">
+                                <a class="menu-link " href="student_info.php">
+                                    <span class="menu-icon">
+                                        <span class="svg-icon svg-icon-2">
+                                            <i class="fa-solid fa-caret-right"></i>
+                                        </span>
+                                    </span>
+                                    <span class="menu-title">Students Information</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link " href="s.php">
+                                    <span class="menu-icon">
+                                        <span class="svg-icon svg-icon-2">
+                                            <i class="fa-solid fa-caret-right"></i>
+                                        </span>
+                                    </span>
+                                    <span class="menu-title">Students Status</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link" tabindex="-1" aria-disabled="true" href="invitation-letter.php">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-envelope-open-text"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Letter Processing</span>
+                        </a>
+                    </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link" href="pre-depart.php">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-person-walking-luggage"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Visa Processing</span>
+                        </a>
+                    </div>
+
+                    <div style="position:absolute;bottom:0;">
+                        <div class="menu-item">
+                            <a class="menu-link" href="logout.php">
+                                <span class="menu-icon">
+                                    <span class="svg-icon svg-icon-2">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                    </span>
+                                </span>
+                                <span class="menu-title">Sign Out</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <?php } else {?>
+
+
+                <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold px-3" id="#kt_app_sidebar_menu"
+                    data-kt-menu="true" data-kt-menu-expand="false">
 
                     <div class="menu-item">
                         <a class="menu-link <?php if($mode['register'] !='paid'){
@@ -121,6 +215,7 @@
                     </div>
                 </div>
                 <!--end::Menu-->
+                <?php }?>
             </div>
             <!--end::Menu wrapper-->
         </div>

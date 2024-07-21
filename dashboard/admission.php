@@ -307,9 +307,6 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
     </a>
 </div>
 
-
-
-
 <?php require "./component/footer.php";
 } else {
     echo "<script>window.location.href = 'index.php'; </script>";

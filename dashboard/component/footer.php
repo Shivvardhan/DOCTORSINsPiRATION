@@ -77,6 +77,14 @@
     margin-top: 16px;
     /* Adjust this to center the icon vertically */
 }
+
+#sub-1 {
+    display: none;
+}
+
+#sub-1.show {
+    display: block;
+}
   </style>
 
   <!--begin::Javascript-->
@@ -91,6 +99,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+
 
 var hostUrl = "assets/";
   </script>
