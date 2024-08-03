@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2024 at 03:06 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Generation Time: Aug 03, 2024 at 05:29 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,14 +34,30 @@ CREATE TABLE `courier` (
   `tracking_id` varchar(50) NOT NULL,
   `date` date NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `courier`
 --
 
 INSERT INTO `courier` (`sno`, `uid`, `courier_by`, `tracking_id`, `date`, `time`) VALUES
-(1, 3, 'dvjavbdj', 'bvdjavuyjadvb55441', '2024-07-03', '2024-07-18 20:05:34');
+(1, 3, 'DTDC AIR INDIA', '1234567DOC', '2024-07-04', '2024-07-31 05:18:08'),
+(2, 7, 'DTDC FLEXI AIR', 'TRACKDTDC2024', '2024-07-24', '2024-07-31 05:18:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `letters`
+--
+
+CREATE TABLE `letters` (
+  `letter_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `file` varchar(100) NOT NULL,
+  `letter_type` varchar(25) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -55,15 +71,15 @@ CREATE TABLE `mode` (
   `application` varchar(30) NOT NULL,
   `invitation_letter` varchar(30) NOT NULL,
   `pre_depart` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mode`
 --
 
 INSERT INTO `mode` (`uid`, `register`, `application`, `invitation_letter`, `pre_depart`) VALUES
-(3, 'paid', 'paid', 'paid', ''),
-(1, 'paid', 'paid', 'paid', 'paid');
+(1, 'paid', 'paid', 'paid', 'paid'),
+(3, 'paid', 'paid', 'paid', '');
 
 -- --------------------------------------------------------
 
@@ -78,7 +94,7 @@ CREATE TABLE `payment_status` (
   `invitation_letter` varchar(50) NOT NULL,
   `offer_letter` varchar(50) NOT NULL,
   `pre_departure` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payment_status`
@@ -113,18 +129,22 @@ CREATE TABLE `users` (
   `address_two` text DEFAULT NULL,
   `12_year_of_completeion` int(11) DEFAULT NULL,
   `12_total_marks_scored` int(11) DEFAULT NULL,
-  `ilt_exam_qualification` tinyint(1) DEFAULT NULL,
+  `ilt_exam_qualification` varchar(25) DEFAULT NULL,
   `neet_qualification_year` int(11) DEFAULT NULL,
-  `neet_total_marks_scored` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `neet_total_marks_scored` int(11) DEFAULT NULL,
+  `hsc_marksheet_pdf` varchar(255) DEFAULT NULL,
+  `neet_marksheet_pdf` varchar(255) DEFAULT NULL,
+  `passport_pdf` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `username`, `r_name`, `email`, `phone`, `password`, `fname`, `lname`, `timestamp`, `usertype`, `l_token`, `l_time`, `f_p_token`, `f_time`, `status`, `address_one`, `address_two`, `12_year_of_completeion`, `12_total_marks_scored`, `ilt_exam_qualification`, `neet_qualification_year`, `neet_total_marks_scored`) VALUES
-(1, 'admin', '', 'admin@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'Harshit', 'varshney', '2023-03-23 05:21:43', 'admin', 'd1e6ec7170b6c0a32e80d01c4f9d9ad9c452ca9a', '2024-07-21 18:18:17', '', NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'radmin', 'zayka', 'harshitvarshney39@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'radmin', '@landmark', '2023-04-13 05:58:04', 'radmin', 'adae986ae33505f7bda196514aff10e016016e3f', '2024-07-21 18:19:59', '', '2023-04-22 22:05:53', 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`uid`, `username`, `r_name`, `email`, `phone`, `password`, `fname`, `lname`, `timestamp`, `usertype`, `l_token`, `l_time`, `f_p_token`, `f_time`, `status`, `address_one`, `address_two`, `12_year_of_completeion`, `12_total_marks_scored`, `ilt_exam_qualification`, `neet_qualification_year`, `neet_total_marks_scored`, `hsc_marksheet_pdf`, `neet_marksheet_pdf`, `passport_pdf`) VALUES
+(1, 'admin', '', 'admin@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'Harshit', 'varshney', '2023-03-23 05:21:43', 'admin', '17c64e6a5e96a2c77a2e3b1523fff2242a62dfc1', '2024-07-31 13:55:35', '', NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'harshitvarshney39@gmail.com', 'zayka', 'harshitvarshney444@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'Harshit', 'Varshney', '2023-04-13 05:58:04', 'radmin', 'ac3fc0936bf0a01f5fde93853af5285df1a0cee9', '2024-07-24 10:40:55', '', '2023-04-22 22:05:53', 'active', 'city center, Gwalior', NULL, 2024, 530, 'Failed', 2013, 510, NULL, NULL, NULL),
+(7, '44@gmail.com', 'zayka', 'harshitvarshney444@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'harshu', 'Varshney', '2023-04-13 05:58:04', 'radmin', 'ac3fc0936bf0a01f5fde93853af5285df1a0cee9', '2024-07-24 10:40:55', '', '2023-04-22 22:05:53', 'active', 'city center, Gwalior', NULL, 2024, 530, 'Passed', 2013, 510, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -137,7 +157,7 @@ CREATE TABLE `u_details` (
   `username` varchar(30) NOT NULL,
   `dob` date NOT NULL,
   `bio` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `u_details`
@@ -159,7 +179,7 @@ CREATE TABLE `u_login_log` (
   `useragent` varchar(200) NOT NULL,
   `macaddress` varchar(100) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `u_login_log`
@@ -236,7 +256,29 @@ INSERT INTO `u_login_log` (`id`, `uid`, `ipaddress`, `useragent`, `macaddress`, 
 (68, 3, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-21 12:47:28'),
 (69, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-21 12:48:04'),
 (70, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-21 12:48:17'),
-(71, 3, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-21 12:49:59');
+(71, 3, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-21 12:49:59'),
+(72, 3, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-24 05:10:29'),
+(73, 3, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-24 05:10:55'),
+(74, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-28 04:31:13'),
+(75, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-28 06:54:44'),
+(76, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-29 05:42:35'),
+(77, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-29 05:49:37'),
+(78, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', '', '2024-07-31 07:07:55'),
+(79, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', '', '2024-07-31 08:25:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visa_details`
+--
+
+CREATE TABLE `visa_details` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `date_of_visa_acceptance` date NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -246,7 +288,20 @@ INSERT INTO `u_login_log` (`id`, `uid`, `ipaddress`, `useragent`, `macaddress`, 
 -- Indexes for table `courier`
 --
 ALTER TABLE `courier`
-  ADD PRIMARY KEY (`sno`);
+  ADD PRIMARY KEY (`sno`),
+  ADD UNIQUE KEY `uid` (`uid`);
+
+--
+-- Indexes for table `letters`
+--
+ALTER TABLE `letters`
+  ADD PRIMARY KEY (`letter_id`);
+
+--
+-- Indexes for table `mode`
+--
+ALTER TABLE `mode`
+  ADD PRIMARY KEY (`uid`);
 
 --
 -- Indexes for table `payment_status`
@@ -277,6 +332,13 @@ ALTER TABLE `u_login_log`
   ADD KEY `log` (`uid`);
 
 --
+-- Indexes for table `visa_details`
+--
+ALTER TABLE `visa_details`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -284,7 +346,13 @@ ALTER TABLE `u_login_log`
 -- AUTO_INCREMENT for table `courier`
 --
 ALTER TABLE `courier`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `letters`
+--
+ALTER TABLE `letters`
+  MODIFY `letter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `payment_status`
@@ -296,7 +364,7 @@ ALTER TABLE `payment_status`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `u_details`
@@ -308,7 +376,13 @@ ALTER TABLE `u_details`
 -- AUTO_INCREMENT for table `u_login_log`
 --
 ALTER TABLE `u_login_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `visa_details`
+--
+ALTER TABLE `visa_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

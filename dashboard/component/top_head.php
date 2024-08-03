@@ -257,42 +257,4 @@
         <!--begin::Wrapper-->
 
 
-        <script>
-        $(document).ready(function() {
-            // Make AJAX request to retrieve data
-            $.ajax({
-                url: 'phpdata/live_a_u.php',
-                dataType: 'json',
-                success: function(data) {
-                    // Update data placeholders
-                    $('#todaylogged').text(data.todaylogged);
-                    $('#currentdateetime').text(data.currentdateetime);
-
-                }
-            });
-
-            // Refresh data every 5 seconds
-            setInterval(function() {
-                $.ajax({
-                    url: 'phpdata/live_a_u.php',
-                    dataType: 'json',
-                    success: function(data) {
-                        // Update data placeholders
-                        $('#todaylogged').text(data.todaylogged);
-
-                    }
-                });
-            }, 5000);
-            setInterval(function() {
-                $.ajax({
-                    url: 'phpdata/live_a_u.php',
-                    dataType: 'json',
-                    success: function(data) {
-                        // Update data placeholders
-                        $('#currentdateetime').text(data.currentdateetime);
-
-                    }
-                });
-            }, 1000);
-        });
-        </script>
+      -->

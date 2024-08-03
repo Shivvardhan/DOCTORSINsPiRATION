@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!--end::Logo-->
                     <!--begin::Image-->
                     <img class="d-none d-lg-block mx-auto w-300px w-lg-75 w-xl-500px mb-10 mb-lg-20"
-                        src="assets/media/stock/etc/index.png" alt="" />
+                        src="assets/media/stock/etc/login-se.png" alt="" />
                     <!--end::Image-->
                     <!--begin::Title-->
                     <h1 class="d-none d-lg-block text-white fs-2qx fw-bold text-center mb-7">Fast, Efficient and

@@ -143,6 +143,21 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         .edit-btn i {
             margin-right: 5px;
         }
+
+        .modal-content {
+            border-radius: 8px;
+        }
+
+        .close {
+            font-size: 1.4rem;
+        }
+
+        .form-control:disabled {
+            background-color: #e9ecef;
+            /* opacity: 1; */
+            ;
+            color: #333;
+        }
     </style>
 
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -153,15 +168,15 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <li class="breadcrumb-item">
                         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                            Students Information</h1>
+                            Invitation Letter</h1>
                     </li>
                 </ul>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                    <li class="breadcrumb-item text-muted">Students</li>
+                    <li class="breadcrumb-item text-muted">Letter Processing</li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-muted">Students Information</li>
+                    <li class="breadcrumb-item text-muted">Invitation Letter</li>
                 </ul>
             </div>
         </div>
@@ -175,9 +190,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
-                            <th scope="col">Phone No.</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Fees Paid</th>
                             <th scope="col">Date of Registration</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -189,6 +202,54 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
             </div>
         </div>
     </div>
+    <!-- Modal Structure for Editing Invitation Letter -->
+    <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editStatusForm" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editStatusModalLabel">Invitation Letter</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Hidden field for storing student ID -->
+                        <input type="hidden" id="studentId" name="studentId">
+
+                        <!-- Name Field (Readonly) -->
+                        <div class="mb-3">
+                            <label for="studentName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="studentName" name="studentName" disabled>
+                        </div>
+
+                        <!-- UID Field (Readonly) -->
+                        <div class="mb-3">
+                            <label for="studentUID" class="form-label">UID</label>
+                            <input type="text" class="form-control" id="studentUID" name="studentUID" disabled required>
+                        </div>
+
+                        <!-- Date of Registration Field (Readonly) -->
+                        <div class="mb-3">
+                            <label for="dateOfRegistration" class="form-label">Date of Registration</label>
+                            <input type="text" class="form-control" id="dateOfRegistration" name="dateOfRegistration" disabled>
+                        </div>
+
+                        <!-- Offer Letter Upload Button -->
+                        <div class="mb-3">
+                            <label for="offerLetterUpload" class="form-label">Upload Invitation Letter</label>
+                            <input type="file" class="form-control" id="offerLetterUpload" name="offerLetterUpload" accept=".pdf" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <script>
         $(document).ready(function() {
@@ -196,16 +257,21 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: './phpdata/student_info_data.php',
+                    url: './phpdata/invitation_letter_data.php',
                     type: 'POST'
                 },
-                columns: [
-                    { data: 0 }, // Name
-                    { data: 1 }, // Phone No.
-                    { data: 2 }, // Status
-                    { data: 3 }, // Fees Paid
-                    { data: 4 }, // Date of Registration
-                    { data: 5 }  // Actions
+                columns: [{
+                        data: 0
+                    }, // Name
+                    {
+                        data: 1
+                    }, // Status
+                    {
+                        data: 2
+                    }, // Date of Registration
+                    {
+                        data: 3
+                    } // Actions
                 ],
                 language: {
                     paginate: {
@@ -220,12 +286,81 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 }
             });
 
-            // Custom search button functionality
-            $('.dataTables_filter button').on('click', function() {
-                table.search($('.dataTables_filter input').val()).draw();
-            });
+            // Debounce function to delay the search
+            function debounce(fn, delay) {
+                var timeoutID;
+                return function() {
+                    var args = arguments;
+                    clearTimeout(timeoutID);
+                    timeoutID = setTimeout(function() {
+                        fn.apply(null, args);
+                    }, delay);
+                };
+            }
+
+            // Custom search input with debounce
+            $('.dataTables_filter input')
+                .off('keyup') // Remove default handler
+                .on('keyup', debounce(function() {
+                    table.search(this.value).draw();
+                }, 500)); // 500ms debounce delay
+        });
+
+        function openEditModal(button) {
+            // Retrieve the data attributes from the clicked button
+            var studentId = button.getAttribute('data-uid');
+            var studentName = button.getAttribute('data-name');
+            var registrationDate = button.getAttribute('data-registration-date');
+
+            // Set the modal fields with the data
+            document.getElementById('studentId').value = studentId;
+            document.getElementById('studentName').value = studentName;
+            document.getElementById('studentUID').value = studentId; // Assuming UID is same as studentId
+            document.getElementById('dateOfRegistration').value = registrationDate;
+
+            // Show the modal (Bootstrap 5 automatically shows the modal if data-bs-toggle is used)
+        }
+
+
+        document.getElementById('editStatusForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(this);
+            fetch('./phpdata/update_invitation_letter.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'The invitation letter has been updated successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            location.reload(); // Reload the page to update the table
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'There was an issue updating the invitation letter. Please try again.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'There was an issue with the request. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
         });
     </script>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

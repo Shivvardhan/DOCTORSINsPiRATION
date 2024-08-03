@@ -24,6 +24,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         }
 
 
+
         /* Page title styling */
         .page-title h1 {
             font-size: 24px;
@@ -143,6 +144,21 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         .edit-btn i {
             margin-right: 5px;
         }
+
+        .modal-content {
+            border-radius: 8px;
+        }
+
+        .close {
+            font-size: 1.4rem;
+        }
+
+        .form-control:disabled {
+            background-color: #e9ecef;
+            /* opacity: 1; */
+            ;
+            color: #333;
+        }
     </style>
 
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -153,7 +169,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <li class="breadcrumb-item">
                         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                            Students Information</h1>
+                            Students Status</h1>
                     </li>
                 </ul>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -161,7 +177,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-muted">Students Information</li>
+                    <li class="breadcrumb-item text-muted">Students Status</li>
                 </ul>
             </div>
         </div>
@@ -175,10 +191,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
-                            <th scope="col">Phone No.</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Fees Paid</th>
-                            <th scope="col">Date of Registration</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -190,22 +203,65 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         </div>
     </div>
 
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editStatusForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editStatusModalLabel">Edit Student Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Readonly field for displaying student ID -->
+                        <div class="mb-3">
+                            <label for="studentId" class="form-label">Student ID</label>
+                            <input type="text" class="form-control" id="studentId" name="studentId" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="Offer Letter">Offer Letter</option>
+                                <option value="Invitation Letter">Invitation Letter</option>
+                                <option value="Pre Departure">Pre Departure</option>
+                                <option value="Visa Processing">Visa Processing</option>
+                                <option value="Post Departure">Post Departure</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
     <script>
         $(document).ready(function() {
             var table = $('#data-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: './phpdata/student_info_data.php',
+                    url: './phpdata/student_status_data.php',
                     type: 'POST'
                 },
-                columns: [
-                    { data: 0 }, // Name
-                    { data: 1 }, // Phone No.
-                    { data: 2 }, // Status
-                    { data: 3 }, // Fees Paid
-                    { data: 4 }, // Date of Registration
-                    { data: 5 }  // Actions
+                columns: [{
+                        data: 0
+                    }, // Name
+                    {
+                        data: 1
+                    }, // Status
+                    {
+                        data: 2
+                    }, // Actions
+
                 ],
                 language: {
                     paginate: {
@@ -225,7 +281,35 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 table.search($('.dataTables_filter input').val()).draw();
             });
         });
+
+
+        function openEditModal(uid, currentStatus) {
+            $('#studentId').val(uid);
+            $('#status').val(currentStatus);
+            $('#editStatusModal').modal('show');
+        }
+
+        $('#editStatusForm').on('submit', function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: 'update_student_status.php',
+                data: formData,
+                success: function(response) {
+                    // Handle success response
+                    $('#editStatusModal').modal('hide');
+                    $('#data-table').DataTable().ajax.reload(); // Reload the DataTable
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                }
+            });
+        });
     </script>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
