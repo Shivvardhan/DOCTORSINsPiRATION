@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2024 at 05:29 PM
+-- Generation Time: Aug 04, 2024 at 07:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -106,6 +106,27 @@ INSERT INTO `payment_status` (`status_id`, `user_id`, `application_submitted`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `session_details`
+--
+
+CREATE TABLE `session_details` (
+  `session_id` int(11) NOT NULL,
+  `session_date` date NOT NULL,
+  `session_time` time NOT NULL,
+  `session_address` varchar(255) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `session_details`
+--
+
+INSERT INTO `session_details` (`session_id`, `session_date`, `session_time`, `session_address`, `timestamp`) VALUES
+(1, '2024-08-07', '14:00:00', 'ABVIITM GWALIOR', '2024-08-04 05:24:27');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -142,7 +163,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `username`, `r_name`, `email`, `phone`, `password`, `fname`, `lname`, `timestamp`, `usertype`, `l_token`, `l_time`, `f_p_token`, `f_time`, `status`, `address_one`, `address_two`, `12_year_of_completeion`, `12_total_marks_scored`, `ilt_exam_qualification`, `neet_qualification_year`, `neet_total_marks_scored`, `hsc_marksheet_pdf`, `neet_marksheet_pdf`, `passport_pdf`) VALUES
-(1, 'admin', '', 'admin@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'Harshit', 'varshney', '2023-03-23 05:21:43', 'admin', '17c64e6a5e96a2c77a2e3b1523fff2242a62dfc1', '2024-07-31 13:55:35', '', NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1, 'admin', '', 'admin@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'Harshit', 'varshney', '2023-03-23 05:21:43', 'admin', '2cd5780920280a981c206991979ec4d8ec4d97cd', '2024-08-04 10:23:27', '', NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 'harshitvarshney39@gmail.com', 'zayka', 'harshitvarshney444@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'Harshit', 'Varshney', '2023-04-13 05:58:04', 'radmin', 'ac3fc0936bf0a01f5fde93853af5285df1a0cee9', '2024-07-24 10:40:55', '', '2023-04-22 22:05:53', 'active', 'city center, Gwalior', NULL, 2024, 530, 'Failed', 2013, 510, NULL, NULL, NULL),
 (7, '44@gmail.com', 'zayka', 'harshitvarshney444@gmail.com', 8878629105, '81dc9bdb52d04dc20036dbd8313ed055', 'harshu', 'Varshney', '2023-04-13 05:58:04', 'radmin', 'ac3fc0936bf0a01f5fde93853af5285df1a0cee9', '2024-07-24 10:40:55', '', '2023-04-22 22:05:53', 'active', 'city center, Gwalior', NULL, 2024, 530, 'Passed', 2013, 510, NULL, NULL, NULL);
 
@@ -264,7 +285,8 @@ INSERT INTO `u_login_log` (`id`, `uid`, `ipaddress`, `useragent`, `macaddress`, 
 (76, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-29 05:42:35'),
 (77, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', '', '2024-07-29 05:49:37'),
 (78, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', '', '2024-07-31 07:07:55'),
-(79, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', '', '2024-07-31 08:25:35');
+(79, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', '', '2024-07-31 08:25:35'),
+(80, 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', '', '2024-08-04 04:53:27');
 
 -- --------------------------------------------------------
 
@@ -289,47 +311,65 @@ CREATE TABLE `visa_details` (
 --
 ALTER TABLE `courier`
   ADD PRIMARY KEY (`sno`),
-  ADD UNIQUE KEY `uid` (`uid`);
+  ADD UNIQUE KEY `uid` (`uid`),
+  ADD KEY `idx_courier_uid` (`uid`),
+  ADD KEY `idx_courier_date` (`date`);
 
 --
 -- Indexes for table `letters`
 --
 ALTER TABLE `letters`
-  ADD PRIMARY KEY (`letter_id`);
+  ADD PRIMARY KEY (`letter_id`),
+  ADD KEY `idx_letters_uid` (`uid`),
+  ADD KEY `idx_letters_letter_type` (`letter_type`);
 
 --
 -- Indexes for table `mode`
 --
 ALTER TABLE `mode`
-  ADD PRIMARY KEY (`uid`);
+  ADD PRIMARY KEY (`uid`),
+  ADD KEY `idx_mode_uid` (`uid`);
 
 --
 -- Indexes for table `payment_status`
 --
 ALTER TABLE `payment_status`
   ADD PRIMARY KEY (`status_id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD UNIQUE KEY `user_id` (`user_id`),
+  ADD KEY `idx_payment_status_user_id` (`user_id`);
+
+--
+-- Indexes for table `session_details`
+--
+ALTER TABLE `session_details`
+  ADD PRIMARY KEY (`session_id`),
+  ADD KEY `idx_session_details_date` (`session_date`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`uid`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `idx_users_username` (`username`),
+  ADD KEY `idx_users_email` (`email`);
 
 --
 -- Indexes for table `u_details`
 --
 ALTER TABLE `u_details`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `idx_u_details_username` (`username`);
 
 --
 -- Indexes for table `u_login_log`
 --
 ALTER TABLE `u_login_log`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `log` (`uid`);
+  ADD KEY `log` (`uid`),
+  ADD KEY `idx_u_login_log_uid` (`uid`),
+  ADD KEY `idx_u_login_log_timestamp` (`timestamp`);
 
 --
 -- Indexes for table `visa_details`
@@ -361,6 +401,12 @@ ALTER TABLE `payment_status`
   MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `session_details`
+--
+ALTER TABLE `session_details`
+  MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -376,7 +422,7 @@ ALTER TABLE `u_details`
 -- AUTO_INCREMENT for table `u_login_log`
 --
 ALTER TABLE `u_login_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `visa_details`
