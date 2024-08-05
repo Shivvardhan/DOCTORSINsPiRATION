@@ -17,7 +17,7 @@ $stmt = $conn->prepare("SELECT l_token FROM `users` WHERE `username` = ?");
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
-    <link rel="icon" type="image/x-icon" href="assets/media/images/logo_w.png">
+    <link rel="icon" type="image/x-icon" href="assets/image/logo_1.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />

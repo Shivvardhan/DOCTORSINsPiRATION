@@ -69,11 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!--begin::Head-->
 
 <head>
-    <title>SYSTEM VISTA</title>
+    <title>Doctor's Inspiration</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
-    <link rel="icon" type="image/x-icon" href="assets/media/images/logo_w.png">
+    <link rel="icon" type="image/x-icon" href="assets/image/logo_1.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
@@ -115,8 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!--begin::Content-->
                 <div class="d-flex flex-column flex-center p-6 p-lg-10 w-100">
                     <!--begin::Logo-->
-                    <a href="Index.php" class="mb-0 mb-lg-20">
-                        <img alt="Logo" src="assets/media/stock/etc/logo_w.png" class="h-40px h-lg-80px" />
+                    <a href="Index.php" class="mb-0 mb-lg-5">
+                        <img alt="Logo" src="assets/image/logo_2.png" class="h-20px h-lg-35px" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Image-->
@@ -128,11 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         Productive</h1>
                     <!--end::Title-->
                     <!--begin::Text-->
-                    <div class="d-none d-lg-block text-white fs-base text-center">Delicious & flexible menu with a wide
-                        range of home goods - fresh<br>
-                        sandwiches, hot hearty lunches,
-                        assorted homemade sweet & savoury<br>
-                        pastries & cakes.</div>
+
                     <!--end::Text-->
                 </div>
                 <!--end::Content-->
