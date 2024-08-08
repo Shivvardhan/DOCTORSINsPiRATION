@@ -210,7 +210,7 @@
                     <div class="menu-item">
                         <a class="menu-link <?php if ($mode['application'] != 'paid') {
                                                     echo "disabled";
-                                                }; ?>" tabindex="-1" aria-disabled="true" href="invitation-letter.php">
+                                                }; ?>" tabindex="-1" aria-disabled="true" href="invitation_letter_dash.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
                                     <i class="fa-solid fa-envelope-open-text"></i>

@@ -282,26 +282,13 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                 </div>
             </div>
 
-            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
-
-                <div class="poppins info-head">
-                    Session Details:
-                </div>
-                <div style="background-color:#DFE7E8;"
-                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
-                    <!--begin::Label-->
-                    <div class="row" style="align-items:center;">
-                        <div class="col-10 mx-4">
-                            <div class="poppins info-text">
-                                Session Has Not been Scheduled
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Label-->
-                </div>
-            </div>
-
-            <?php if("staff"=="filled_data") {?>
+            <?php
+            $sql = "SELECT * FROM `session_details`";
+            $result = $conn->query($sql);
+            
+            if ($result->num_rows == 1) {
+                while($row = $result->fetch_assoc()) {
+              ?>
             <!-- After Session details are updated by staff account -->
             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
 
@@ -314,12 +301,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                     <div class="row" style="align-items:center;">
                         <div class="col-5 mx-4">
                             <div class="poppins info-text">
-                                Session Date : 19/02/1256
+                                Session Date : <?php echo $row['session_date'];?>
                             </div>
                         </div>
                         <div class="col-5 mx-4">
                             <div class="poppins info-text">
-                                Session Time: 11:00 am
+                                Session Time: <?php echo $row['session_time'];?>
                             </div>
                         </div>
                     </div>
@@ -348,14 +335,35 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         </div>
                         <div class="col-10 mln">
                             <div class="poppins info-text-a">
-                                Address : 1234 Elm Street Springfield, IL 62704 United States
+                                Address : <?php echo $row['session_address'];?>
                             </div>
                         </div>
                     </div>
                     <!--end::Label-->
                 </div>
             </div>
-            <?php };?>
+            <?php } } 
+            else {
+            ?>
+            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
+
+<div class="poppins info-head">
+    Session Details:
+</div>
+<div style="background-color:#DFE7E8;"
+    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
+    <!--begin::Label-->
+    <div class="row" style="align-items:center;">
+        <div class="col-10 mx-4">
+            <div class="poppins info-text">
+                Session Has Not been Scheduled
+            </div>
+        </div>
+    </div>
+    <!--end::Label-->
+</div>
+</div> 
+<?php };?>
         </div>
 
     </div>
@@ -363,7 +371,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
 </div>
 
-<?php if("staff"=="filled_data") {?>
+<?php
+   $sql = "SELECT * FROM `session_details`";
+   $result = $conn->query($sql);
+   
+   if ($result->num_rows == 1) {
+     ?>
 <!-- Note section -->
 <div class="d-flex fs-4 px-8 text-center" style="justify-content:center;align-items:center;font-weight:600;">
     <p class="info-text" style="color:#18618E;">

@@ -212,6 +212,9 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         font-size: 11px !important;
     }
 }
+.link:hover{
+    text-decoration:underline;
+}
 </style>
 
 
@@ -299,6 +302,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
             </div>
 
 
+            
             <div class="d-flex" style="align-items:center;">
                 <div class="icon-container" style="justify-content:left;">
                     <div class="icont" style="background-color:#18618E;">
@@ -308,11 +312,28 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                     </div>
                 </div>
                 <div class="px-8">
-                    <div class="poppins info-text">
+                <a href="<?php
+            
+                $sql = "SELECT `file` FROM letters WHERE uid='".$_SESSION['uid']."' AND letter_type='INVITATION_LETTER'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows == 1) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "./uploads/";
+                        echo $row['file'];
+                    }
+                } else {
+                    echo "#";
+                }
+
+                ?>" target="_blank">
+                    <div class="link poppins info-text">
                         Download Invitation Letter
                     </div>
+                </a>
                 </div>
             </div>
+            
 
 
             <!-- if payment is paid then shown only -->
