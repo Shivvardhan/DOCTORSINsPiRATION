@@ -240,7 +240,9 @@
                                 <div class="profile-name">
                                     <?php echo $_SESSION['fname'] ." ". $_SESSION['lname']?>
                                 </div>
-                                <div class="profile-role">Admin</div>
+                                <div class="profile-role"><?php if($_SESSION['usertype'] == "admin") {
+                                    echo "Staff";
+                                } else { echo "Student";};?></div>
                             </div>
                         </div>
                         <!--end::User menu-->
