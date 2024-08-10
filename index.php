@@ -7,6 +7,12 @@
     <title>Registration Form</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Include SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- Include SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
 </head>
 
 <body>
@@ -22,7 +28,7 @@
             </div>
         </div>
         <div class="form-container">
-            <form id="multi-section-form">
+            <form id="multi-section-form" enctype="multipart/form-data">
                 <section class="form-section" id="section-1">
                     <div style="display: flex;justify-content: center;">
                         <h1 class="register-button">REGISTER NOW</h1>
@@ -30,8 +36,14 @@
                     <div style="margin-top:1.5em">
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
-                                <label for="name">NAME:</label>
-                                <input type="text" id="name" name="name">
+                                <label for="fname">FIRST NAME:</label>
+                                <input type="text" id="fname" name="fname">
+                            </div>
+                        </div>
+                        <div style="display: flex;justify-content: center;">
+                            <div class="form-group">
+                                <label for="lname">LAST NAME:</label>
+                                <input type="text" id="lname" name="lname">
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
@@ -43,21 +55,27 @@
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="year-of-completion">12TH YEAR OF COMPLETION:</label>
-                                <input type="text" id="year-of-completion" name="year-of-completion">
+                                <input type="number" id="year-of-completion" name="year-of-completion">
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="total-marks">12TH TOTAL MARKS SCORED:</label>
-                                <input type="text" id="total-marks" name="total-marks">
+                                <input type="number" id="total-marks" name="total-marks">
                             </div>
                         </div>
-                        <div style="display: flex;justify-content: center;">
+                        <div style="display: flex; justify-content: center;">
                             <div class="form-group">
                                 <label for="ilts-qualification">IELTS EXAM QUALIFICATION:</label>
-                                <input type="text" id="ilts-qualification" name="ilts-qualification">
+                                <select id="ilts-qualification" name="ilts-qualification" class="form-control">
+                                    <option value="">Select...</option>
+                                    <option value="Passed">Passed</option>
+                                    <option value="Failed">Failed</option>
+                                    <option value="Not Attempted">Not Attempted</option>
+                                </select>
                             </div>
                         </div>
+
                     </div>
                     <div class="line-container">
                         <hr id="line-before" class="line">
@@ -71,19 +89,19 @@
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="neet-year">NEET Qualification Year:</label>
-                                <input type="text" id="neet-year" name="neet-year" required>
+                                <input type="number" id="neet-year" name="neet-year" required>
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="neet-marks">NEET Total Marks Scored:</label>
-                                <input type="text" id="neet-marks" name="neet-marks" required>
+                                <input type="number" id="neet-marks" name="neet-marks" required>
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="mobile">Mobile No. :</label>
-                                <input type="text" id="mobile" name="mobile" required>
+                                <input type="number" id="mobile" name="mobile" required>
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
@@ -129,7 +147,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputHsc" name="file" onchange="showFileName('fileInputHsc', 'fileNameHsc')">
+                                    <input type="file" id="fileInputHsc" name="fileInputHsc" onchange="showFileName('fileInputHsc', 'fileNameHsc')">
                                 </label>
                             </div>
                             <br>
@@ -147,7 +165,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputNeet" name="file" onchange="showFileName('fileInputNeet', 'fileNameNeet')">
+                                    <input type="file" id="fileInputNeet" name="fileInputNeet" onchange="showFileName('fileInputNeet', 'fileNameNeet')">
                                 </label>
                             </div>
                             <br>
@@ -167,7 +185,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputPassport" name="file" onchange="showFileName('fileInputPassport', 'fileNamePassport')">
+                                    <input type="file" id="fileInputPassport" name="fileInputPassport" onchange="showFileName('fileInputPassport', 'fileNamePassport')">
                                 </label>
                             </div>
                             <br>
@@ -213,33 +231,33 @@
                         <hr class="line">
                     </div>
                 </section>
-            </form>
+
         </div>
     </div>
 
     <footer>
     </footer>
-  <!-- Modal Structure -->
-<!-- Modal Structure -->
-<div id="custom-modal" class="custom-modal">
-    <div class="custom-modal-content">
-        <div class="custom-modal-header">
-            <span class="custom-modal-close">&times;</span>
-            <h5>Invitation Letter Payment</h5>
-        </div>
-        <div class="custom-modal-body">
-            <h3>Invitation Letter Fee - 25,000 Rs</h3>
-            <div class="mb-3 d-flex justify-content-center">
-                <img src="./dashboard/assets/image/QR.jpg" alt="QR" height="300px">
+    <!-- Modal Structure -->
+    <!-- Modal Structure -->
+    <div id="custom-modal" class="custom-modal">
+        <div class="custom-modal-content">
+            <div class="custom-modal-header">
+                <span class="custom-modal-close">&times;</span>
+                <h5>Registration</h5>
             </div>
-            <form id="payment-form">
+            <div class="custom-modal-body">
+                <h3>Registration Fee - 10,000 Rs</h3>
+                <div class="mb-3 d-flex justify-content-center">
+                    <img src="./dashboard/assets/image/QR.jpg" alt="QR" height="300px">
+                </div>
+
                 <div class="mb-3">
                     <label for="Name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="Name" name="name" required>
                 </div>
                 <div class="mb-3">
                     <label for="Amount" class="form-label">Amount</label>
-                    <input type="number" class="form-control" id="Amount" name="amount" required>
+                    <input type="number" class="form-control" id="Amount" name="amount" required value="10000" disabled>
                 </div>
                 <div class="mb-3">
                     <label for="Utr" class="form-label">UTR Number</label>
@@ -265,66 +283,100 @@
                     <button type="button" class="custom-modal-btn custom-modal-cancel">Cancel</button>
                     <button type="submit" class="custom-modal-btn custom-modal-pay">Pay</button>
                 </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+
+
 
 
     <script>
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll(".form-section");
-            sections.forEach((section) => section.classList.remove("active"));
-            document.getElementById("section-" + sectionId).classList.add("active");
+        // Get the modal
+        const modal = document.getElementById("custom-modal");
+
+        // Get the button that opens the modal
+        const payNowBtn = document.querySelector(".pay");
+
+        // Get the <span> element that closes the modal
+        const closeBtn = document.querySelector(".custom-modal-close");
+
+        // Get the cancel button
+        const cancelBtn = document.querySelector(".custom-modal-cancel");
+
+        // Open the modal
+        payNowBtn.onclick = function() {
+            modal.style.display = "block";
         }
 
-        function nextSection(sectionId) {
-            showSection(sectionId);
+        // Close the modal when the user clicks on <span> (x) or Cancel button
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
         }
 
-        function prevSection(sectionId) {
-            showSection(sectionId);
+        cancelBtn.onclick = function() {
+            modal.style.display = "none";
         }
 
-        // Initially show the first section
-        document.addEventListener("DOMContentLoaded", () => {
-            showSection(1);
-        });
+        // Close the modal when the user clicks anywhere outside of the modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 
 <script>
-    // Get the modal
-    const modal = document.getElementById("custom-modal");
-    
-    // Get the button that opens the modal
-    const payNowBtn = document.querySelector(".pay");
-    
-    // Get the <span> element that closes the modal
-    const closeBtn = document.querySelector(".custom-modal-close");
-    
-    // Get the cancel button
-    const cancelBtn = document.querySelector(".custom-modal-cancel");
-    
-    // Open the modal
-    payNowBtn.onclick = function() {
-        modal.style.display = "block";
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll(".form-section");
+        sections.forEach((section) => section.classList.remove("active"));
+        document.getElementById("section-" + sectionId).classList.add("active");
     }
-    
-    // Close the modal when the user clicks on <span> (x) or Cancel button
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-    
-    cancelBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-    
-    // Close the modal when the user clicks anywhere outside of the modal
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+
+    function nextSection(sectionId) {
+        if (sectionId === 3) {
+            // Validate password and confirm password
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('re-password').value;
+
+            if (password !== confirmPassword) {
+                Swal.fire('Error', 'Passwords do not match!', 'error');
+                return;
+            }
         }
+        showSection(sectionId);
     }
+
+    function prevSection(sectionId) {
+        showSection(sectionId);
+    }
+
+    // Initially show the first section
+    document.addEventListener("DOMContentLoaded", () => {
+        showSection(1);
+    });
+
+    document.getElementById('multi-section-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var formData = new FormData(this);
+
+        fetch('./dashboard/phpdata/signup.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire('Success', data.message, 'success');
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            })
+            .catch(error => {
+                Swal.fire('Error', 'An unexpected error occurred!', 'error');
+            });
+    });
 </script>
 
 

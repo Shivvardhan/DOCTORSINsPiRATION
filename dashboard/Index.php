@@ -204,9 +204,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="text-gray-500 text-center fw-semibold fs-6">
 
                             </div>
-                            <div class="text-gray-500 text-center fw-semibold fs-6">
+                            <!-- <div class="text-gray-500 text-center fw-semibold fs-6">
                                 <a href="tablelogin.php" class="link-primary">Login as Staff Account</a>
-                            </div>
+                            </div> -->
                             <!--end::Sign up-->
                         </form>
                         <!--end::Form-->
