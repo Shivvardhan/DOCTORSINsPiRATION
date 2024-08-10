@@ -407,15 +407,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tdate = $_POST['tdate'];
     $ttime = $_POST['ttime'];
     $upi = $_POST['upi'];
+    $payment_type = "application";
 
     // SQL statement
-    $sql = "INSERT INTO payments (uid, name, amount, utr_number, transaction_date, transaction_time, upi_id) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO payments (uid, name, amount, payment_type, utr_number, transaction_date, transaction_time, upi_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepare the statement
     if ($stmt = $conn->prepare($sql)) {
         // Bind parameters
-        $stmt->bind_param("sssssss", $studentId, $name, $amount, $utr, $tdate, $ttime, $upi);
+        $stmt->bind_param("sssssss", $studentId, $name, $amount, $payment_type, $utr, $tdate, $ttime, $upi);
 
         // Execute the statement
         if ($stmt->execute()) {
@@ -446,20 +447,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             text: 'Error preparing the statement: " . $conn->error . "',
         });
         </script>";
-    }
-
-    $sql2 = "UPDATE `mode` SET `application`='paid' WHERE uid=?";
-
-    // Prepare the statement
-    if ($stmt2 = $conn->prepare($sql2)) {
-        // Bind the $studentId parameter to the SQL query
-        $stmt2->bind_param("s", $studentId);
-    
-        // Execute the update statement
-        $stmt2->execute();  // No user response needed
-    
-        // Close the statement
-        $stmt2->close();
     }
 }
 ?>

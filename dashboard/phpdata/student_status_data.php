@@ -14,25 +14,26 @@ $length = isset($_POST['length']) ? intval($_POST['length']) : 10;
 $search = isset($_POST['search']['value']) ? $_POST['search']['value'] : '';
 
 // Base SQL query to count total records
-$sql = "SELECT COUNT(*) as total FROM users WHERE usertype = 'radmin'";
+$sql = "SELECT COUNT(*) as total FROM payments";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $totalData = $row['total'];
 
 // Filtering logic based on search input
-$whereClause = "WHERE usertype = 'radmin'";
 $params = [];
 $types = "";
 
 if (!empty($search)) {
     $searchTerm = "%$search%";
-    $whereClause .= " AND (CONCAT(fname, ' ', lname) LIKE ? OR status LIKE ?)";
-    $params = array_merge($params, [$searchTerm, $searchTerm]);
+    $whereClause = "WHERE uid LIKE ? OR name LIKE ? OR utr_number LIKE ?";
+    $params = array_merge($params, [$searchTerm, $searchTerm, $searchTerm]);
     $types .= str_repeat("s", count($params));
+} else {
+    $whereClause = ""; // No filtering if search is empty
 }
 
 // Count total records with applied filter
-$sql = "SELECT COUNT(*) as totalFiltered FROM users $whereClause";
+$sql = "SELECT COUNT(*) as totalFiltered FROM payments $whereClause";
 $stmt = $conn->prepare($sql);
 if (!empty($params)) {
     $stmt->bind_param($types, ...$params);
@@ -43,8 +44,7 @@ $row = $result->fetch_assoc();
 $totalFiltered = $row['totalFiltered'];
 
 // Fetch the filtered data
-$sql = "SELECT uid, CONCAT(fname, ' ', lname) AS name, 'Visa Processing' as  status
-        FROM users $whereClause LIMIT ?, ?";
+$sql = "SELECT * FROM payments $whereClause LIMIT ?, ?";
 $params = array_merge($params, [$start, $length]);
 $types .= "ii"; // Add types for LIMIT parameters
 
@@ -57,14 +57,25 @@ $result = $stmt->get_result();
 $data = [];
 while ($row = $result->fetch_assoc()) {
     $data[] = [
+        $row['uid'],
         $row['name'],
-        '<button type="button" class="btn btn-dark status-btn">'.$row['status'].'</button>',
-        '<button type="button" class="btn btn-dark edit-btn" onclick="openEditModal('.$row['uid'].', \''.$row['status'].'\')">
-            <i class="fa fa-pencil-alt"></i> Edit
-        </button>'
+        $row['amount'],
+        $row['payment_type'],
+        $row['utr_number'],
+        $row['transaction_date'],
+        $row['transaction_time'],
+        $row['upi_id'],
+        '<div class="d-flex" style="gap:10px;">
+        <button type="button" class="btn btn-success edit-btn" >
+            Accept
+        </button>
+        <button type="button" class="btn btn-danger edit-btn" >
+            Decline
+        </button>
+        </div>',
+        $row['timestamp'],
     ];
 }
-
 
 // Create the response
 $response = [
