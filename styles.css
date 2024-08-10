@@ -83,6 +83,14 @@ body {
     background-color: white;
 }
 
+.form-group select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #007e8a;
+    border-radius: 15px !important;
+    background-color: white;
+}
+
 .line-container {
     display: flex;
     align-items: center;

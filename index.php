@@ -147,7 +147,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputHsc" name="fileInputHsc" onchange="showFileName('fileInputHsc', 'fileNameHsc')">
+                                    <input type="file" id="fileInputHsc" name="fileInputHsc" onchange="showFileName('fileInputHsc', 'fileNameHsc')" required accept=".pdf">
                                 </label>
                             </div>
                             <br>
@@ -165,7 +165,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputNeet" name="fileInputNeet" onchange="showFileName('fileInputNeet', 'fileNameNeet')">
+                                    <input type="file" id="fileInputNeet" name="fileInputNeet" onchange="showFileName('fileInputNeet', 'fileNameNeet')" required accept=".pdf">
                                 </label>
                             </div>
                             <br>
@@ -185,7 +185,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputPassport" name="fileInputPassport" onchange="showFileName('fileInputPassport', 'fileNamePassport')">
+                                    <input type="file" id="fileInputPassport" name="fileInputPassport" onchange="showFileName('fileInputPassport', 'fileNamePassport')" required accept=".pdf">
                                 </label>
                             </div>
                             <br>
@@ -204,8 +204,18 @@
                     function showFileName(inputId, fileNameId) {
                         const fileInput = document.getElementById(inputId);
                         const fileNameDiv = document.getElementById(fileNameId);
+
                         if (fileInput.files.length > 0) {
-                            fileNameDiv.textContent = 'Selected file: ' + fileInput.files[0].name;
+                            const file = fileInput.files[0];
+                            const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+
+                            if (file.size > maxSize) {
+                                alert('File size exceeds 2MB. Please choose a smaller file.');
+                                fileInput.value = ''; // Clear the input
+                                fileNameDiv.textContent = 'No file selected';
+                            } else {
+                                fileNameDiv.textContent = '' + file.name;
+                            }
                         } else {
                             fileNameDiv.textContent = 'No file selected';
                         }
@@ -250,40 +260,41 @@
                 <div class="mb-3 d-flex justify-content-center">
                     <img src="./dashboard/assets/image/QR.jpg" alt="QR" height="300px">
                 </div>
-
-                <div class="mb-3">
-                    <label for="Name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="Name" name="name" required>
+                <div id="payment-form">
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="Name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Amount" class="form-label">Amount</label>
+                        <input type="number" class="form-control" id="Amount" name="amounts" required value="10000" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Utr" class="form-label">UTR Number</label>
+                        <input type="text" class="form-control" id="Utr" name="utr" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="TDate" class="form-label">Transaction Date</label>
+                        <input type="date" class="form-control" id="TDate" name="tdate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Ttime" class="form-label">Transaction Time</label>
+                        <input type="time" class="form-control" id="Ttime" name="ttime" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="upi" class="form-label">Your UPI ID</label>
+                        <input type="text" class="form-control" id="upi" name="upi" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="note" class="form-label note">Note:</label>
+                        <p class="form-note">Can only be paid once. Please be careful.</p>
+                    </div>
+                    <div class="custom-modal-footer">
+                        <button type="button" class="custom-modal-btn custom-modal-cancel">Cancel</button>
+                        <button type="submit" class="custom-modal-btn custom-modal-pay">Pay</button>
+                    </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="Amount" class="form-label">Amount</label>
-                    <input type="number" class="form-control" id="Amount" name="amount" required value="10000" disabled>
-                </div>
-                <div class="mb-3">
-                    <label for="Utr" class="form-label">UTR Number</label>
-                    <input type="text" class="form-control" id="Utr" name="utr" required>
-                </div>
-                <div class="mb-3">
-                    <label for="TDate" class="form-label">Transaction Date</label>
-                    <input type="date" class="form-control" id="TDate" name="tdate" required>
-                </div>
-                <div class="mb-3">
-                    <label for="Ttime" class="form-label">Transaction Time</label>
-                    <input type="time" class="form-control" id="Ttime" name="ttime" required>
-                </div>
-                <div class="mb-3">
-                    <label for="upi" class="form-label">Your UPI ID</label>
-                    <input type="text" class="form-control" id="upi" name="upi" required>
-                </div>
-                <div class="mb-3">
-                    <label for="note" class="form-label note">Note:</label>
-                    <p class="form-note">Can only be paid once. Please be careful.</p>
-                </div>
-                <div class="custom-modal-footer">
-                    <button type="button" class="custom-modal-btn custom-modal-cancel">Cancel</button>
-                    <button type="submit" class="custom-modal-btn custom-modal-pay">Pay</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
@@ -326,58 +337,66 @@
         }
     </script>
 
-<script>
-    function showSection(sectionId) {
-        const sections = document.querySelectorAll(".form-section");
-        sections.forEach((section) => section.classList.remove("active"));
-        document.getElementById("section-" + sectionId).classList.add("active");
-    }
-
-    function nextSection(sectionId) {
-        if (sectionId === 3) {
-            // Validate password and confirm password
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('re-password').value;
-
-            if (password !== confirmPassword) {
-                Swal.fire('Error', 'Passwords do not match!', 'error');
-                return;
-            }
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll(".form-section");
+            sections.forEach((section) => section.classList.remove("active"));
+            document.getElementById("section-" + sectionId).classList.add("active");
         }
-        showSection(sectionId);
-    }
 
-    function prevSection(sectionId) {
-        showSection(sectionId);
-    }
+        function nextSection(sectionId) {
+            if (sectionId === 3) {
+                // Validate password and confirm password
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('re-password').value;
 
-    // Initially show the first section
-    document.addEventListener("DOMContentLoaded", () => {
-        showSection(1);
-    });
-
-    document.getElementById('multi-section-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var formData = new FormData(this);
-
-        fetch('./dashboard/phpdata/signup.php', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    Swal.fire('Success', data.message, 'success');
-                } else {
-                    Swal.fire('Error', data.message, 'error');
+                if (password !== confirmPassword) {
+                    Swal.fire('Error', 'Passwords do not match!', 'error');
+                    return;
                 }
-            })
-            .catch(error => {
-                Swal.fire('Error', 'An unexpected error occurred!', 'error');
-            });
-    });
-</script>
+            }
+            showSection(sectionId);
+        }
+
+        function prevSection(sectionId) {
+            showSection(sectionId);
+        }
+
+        // Initially show the first section
+        document.addEventListener("DOMContentLoaded", () => {
+            showSection(1);
+        });
+
+        document.getElementById('multi-section-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('./dashboard/phpdata/signup.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        Swal.fire({
+                            title: 'Success',
+                            text: data.message,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            // Redirect to dashboard after clicking OK
+                            window.location.href = './dashboard'; // Adjust the URL according to your dashboard path
+                        });
+                    } else {
+                        Swal.fire('Error', data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    Swal.fire('Error', 'An unexpected error occurred!', 'error');
+                });
+        });
+    </script>
 
 
 </body>

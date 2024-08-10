@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Collect payment form data
     $payment_name = $_POST['name'] ?? $full_name; // Use full name by default if payment name is not provided
-    $amount = $_POST['amount'] ?? 0;
+    $amount = $_POST['amounts'] ?? 0;
     $utr = $_POST['utr'] ?? '';
     $tdate = $_POST['tdate'] ?? '';
     $ttime = $_POST['ttime'] ?? '';
@@ -53,6 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     function handleFileUpload($fileInputName, $fileType, $uid, $uploads_dir, $conn)
     {
         if (!empty($_FILES[$fileInputName]['name'])) {
+            // Check file size (2MB = 2 * 1024 * 1024 bytes)
+            if ($_FILES[$fileInputName]['size'] > 2 * 1024 * 1024) {
+                return ['status' => 'error', 'message' => 'File size exceeds the 2MB limit.'];
+            }
+
             $fileName = generateFileName($fileType, $uid);
             if (move_uploaded_file($_FILES[$fileInputName]['tmp_name'], $uploads_dir . $fileName)) {
                 // Update the file name in the database
@@ -62,16 +67,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->execute();
                     $stmt->close();
                 } else {
-                    throw new Exception('Database preparation failed for ' . $fileType . ' update! Error: ' . $conn->error);
+                    return ['status' => 'error', 'message' => 'Database preparation failed for ' . $fileType . ' update! Error: ' . $conn->error];
                 }
-                return $fileName;
+                return ['status' => 'success', 'fileName' => $fileName];
             } else {
-                throw new Exception('Failed to upload ' . $fileType . '.');
+                return ['status' => 'error', 'message' => 'Failed to upload ' . $fileType . '.'];
             }
         }
-        return '';
+        return ['status' => 'success', 'fileName' => '']; // No file uploaded, return empty fileName
     }
-
+    
     // Start a transaction
     $conn->begin_transaction();
 
@@ -93,9 +98,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Handle file uploads
-        $hsc_marksheet = handleFileUpload('fileInputHsc', 'hsc_marksheet', $uid, $uploads_dir, $conn);
-        $neet_marksheet = handleFileUpload('fileInputNeet', 'neet_marksheet', $uid, $uploads_dir, $conn);
-        $passport = handleFileUpload('fileInputPassport', 'passport', $uid, $uploads_dir, $conn);
+        $hsc_result = handleFileUpload('fileInputHsc', 'hsc_marksheet', $uid, $uploads_dir, $conn);
+        if ($hsc_result['status'] == 'error') {
+            throw new Exception($hsc_result['message']);
+        }
+        $hsc_marksheet = $hsc_result['fileName'];
+
+        $neet_result = handleFileUpload('fileInputNeet', 'neet_marksheet', $uid, $uploads_dir, $conn);
+        if ($neet_result['status'] == 'error') {
+            throw new Exception($neet_result['message']);
+        }
+        $neet_marksheet = $neet_result['fileName'];
+
+        $passport_result = handleFileUpload('fileInputPassport', 'passport', $uid, $uploads_dir, $conn);
+        if ($passport_result['status'] == 'error') {
+            throw new Exception($passport_result['message']);
+        }
+        $passport = $passport_result['fileName'];
 
         // Insert payment data into the payments table
         $sql_payment = "INSERT INTO payments (uid, name, amount, utr_number, transaction_date, transaction_time, upi_id)

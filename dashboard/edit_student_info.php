@@ -160,12 +160,35 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         .btn-secondary:hover {
             opacity: 0.8;
         }
+
+        .step {
+            margin-bottom: 20px;
+        }
+
+        .step h4 {
+            color: #555;
+            margin-top: 0;
+        }
+
+        .step p {
+            margin: 5px 0;
+        }
+
+        .step ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .step ul li {
+            margin-bottom: 10px;
+        }
     </style>
     <script>
         function showSection(sectionId) {
             // Hide all sections
             document.getElementById('personal-details').style.display = 'none';
             document.getElementById('document-details').style.display = 'none';
+            document.getElementById('enrollement-process').style.display = 'none';
             // Show the selected section
             document.getElementById(sectionId).style.display = 'block';
         }
@@ -244,6 +267,12 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                             <a href="#" onclick="showSection('document-details')">
                                 <i class="fas fa-file-alt"></i> Document
                             </a>
+                            <?php if ($_SESSION['usertype'] === 'radmin') { ?>
+                                <a href="#" onclick="showSection('enrollement-process')">
+                                    <i class="fas fa-file"></i> Enrollement Process
+                                </a>
+                            <?php } ?>
+
                         </div>
                     </div>
 
@@ -354,9 +383,10 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                     </div>
 
                                 </div>
-                                <button type="submit" class="btn btn-primary" name="update_personal" style="background-color: #166572;" <?php if ($_SESSION['usertype'] === 'radmin') {
-                                                                                                                                            echo "disabled";
-                                                                                                                                        } ?>>Update</button>
+                                <?php if ($_SESSION['usertype'] !== 'radmin') { ?>
+                                    <button type="submit" class="btn btn-primary" name="update_personal" style="background-color: #166572;">Update</button>
+                                <?php            } ?>
+
                             </form>
                         </div>
 
@@ -474,6 +504,37 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                 </table>
                             </div>
                         </div>
+
+                        <?php if ($_SESSION['usertype'] === 'radmin') { ?>
+                            <div id="enrollement-process" style="display: none;">
+                                <div class="custom-header">
+                                    <h3 class="text-light">Enrollment Process</h3>
+                                </div>
+                                <div class="step">
+                                    <h4>Step 1: Log in to Your Personal Dashboard</h4>
+                                    <p>Begin your journey by logging in to your Personal Dashboard on the Doctor's Inspiration website. Here, you will register yourself and submit the necessary documents required to obtain your offer letter. Please note that a registration fee of <b>INR 10,000</b> is required for university registration.</p>
+                                </div>
+                                <div class="step">
+                                    <h4>Step 2: Receive Your Offer Letter</h4>
+                                    <p>Once we process your documents, you will receive your personal offer letter, delivered directly to your email, WhatsApp, and available on your Personal Dashboard. This is an important milestone in your educational journey! After receiving your offer letter, you will need to pay <b>INR 50,000</b> to unlock your invitation letter and proceed with the next steps.</p>
+                                </div>
+                                <div class="step">
+                                    <h4>Step 3: Await Your Invitation Letter</h4>
+                                    <p>After receiving your offer letter, please be prepared to wait for your invitation letter, which usually takes <b>20-40 days</b> to arrive. This invitation letter is crucial for your visa application process. Upon receiving your invitation letter, you will be required to pay <b>INR 50,000</b> for visa assistance. We are pleased to inform you that almost <b>85% of your customer service needs are covered </b>before your departure.</p>
+                                </div>
+                                <div class="step">
+                                    <h4>Step 4: Pre-Departure Seminar</h4>
+                                    <p>As your departure date approaches, you’ll receive an invitation to a pre-departure seminar. This event will include your fellow classmates who will be traveling with you, providing a fantastic opportunity to make friends and connect with your future peers!</p>
+                                </div>
+                                <div class="step">
+                                    <h4>Step 5: Post-Departure Instructions</h4>
+                                    <p>Upon your arrival in your chosen country, you will need to complete a few essential tasks. This includes paying your university fees, registering for your hostel, and settling any customs services, as briefly outlined in your Personal Dashboard. At this stage, you will take care of payments for your dedicated university fees, hostel arrangements, and any outstanding customer service charges.</p>
+                                    <p>We are committed to supporting you every step of the way in your academic journey! If you have any questions or need assistance, don’t hesitate to reach out.</p>
+                                </div>
+                            </div>
+
+
+                        <?php } ?>
 
                     </div>
                 </div>
