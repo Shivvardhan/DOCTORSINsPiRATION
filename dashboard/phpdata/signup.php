@@ -49,12 +49,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $fileType . '_' . $uid . '_' . time() . '.pdf';
     }
 
-    // Function to handle file uploads and return file names
-    function handleFileUpload($fileInputName, $fileType, $uid, $uploads_dir)
+    // Function to handle file uploads
+    function handleFileUpload($fileInputName, $fileType, $uid, $uploads_dir, $conn)
     {
         if (!empty($_FILES[$fileInputName]['name'])) {
             $fileName = generateFileName($fileType, $uid);
             if (move_uploaded_file($_FILES[$fileInputName]['tmp_name'], $uploads_dir . $fileName)) {
+                // Update the file name in the database
+                $sql_update = "UPDATE users SET " . $fileType . "_pdf = ? WHERE uid = ?";
+                if ($stmt = $conn->prepare($sql_update)) {
+                    $stmt->bind_param("si", $fileName, $uid);
+                    $stmt->execute();
+                    $stmt->close();
+                } else {
+                    throw new Exception('Database preparation failed for ' . $fileType . ' update! Error: ' . $conn->error);
+                }
                 return $fileName;
             } else {
                 throw new Exception('Failed to upload ' . $fileType . '.');
@@ -68,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Insert user data into the users table
-        $sql_registration = "INSERT INTO users (username, r_name, email, phone, password, fname, lname, address_one, address_two, `12_year_of_completeion`, `12_total_marks_scored`, `ilt_exam_qualification`, neet_qualification_year, neet_total_marks_scored, hsc_marksheet_pdf, neet_marksheet_pdf, passport_pdf, usertype, status)
+        $sql_registration = "INSERT INTO users (username, r_name, email, phone, password, fname, lname, address_one, address_two, 12_year_of_completeion, 12_total_marks_scored, ilt_exam_qualification, neet_qualification_year, neet_total_marks_scored, hsc_marksheet_pdf, neet_marksheet_pdf, passport_pdf, usertype, status)
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'radmin', 'active')";
         if ($stmt = $conn->prepare($sql_registration)) {
             $stmt->bind_param("sssisssssiissssss", $email, $full_name, $email, $mobile, $password, $fname, $lname, $address_one, $address_two, $year_of_completion, $total_marks, $ilts_qualification, $neet_year, $neet_marks, $hsc_marksheet, $neet_marksheet, $passport);
@@ -84,21 +93,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Handle file uploads
-        $hsc_marksheet = handleFileUpload('fileInputHsc', 'hsc_marksheet', $uid, $uploads_dir);
-        $neet_marksheet = handleFileUpload('fileInputNeet', 'neet_marksheet', $uid, $uploads_dir);
-        $passport = handleFileUpload('fileInputPassport', 'passport', $uid, $uploads_dir);
-
-        // Update file names in the database
-        $sql_update_files = "UPDATE users SET hsc_marksheet_pdf = ?, neet_marksheet_pdf = ?, passport_pdf = ? WHERE uid = ?";
-        if ($stmt = $conn->prepare($sql_update_files)) {
-            $stmt->bind_param("sssi", $hsc_marksheet, $neet_marksheet, $passport, $uid);
-            if (!$stmt->execute()) {
-                throw new Exception('Failed to update file names! Error: ' . $stmt->error);
-            }
-            $stmt->close();
-        } else {
-            throw new Exception('Database preparation failed for file updates! Error: ' . $conn->error);
-        }
+        $hsc_marksheet = handleFileUpload('fileInputHsc', 'hsc_marksheet', $uid, $uploads_dir, $conn);
+        $neet_marksheet = handleFileUpload('fileInputNeet', 'neet_marksheet', $uid, $uploads_dir, $conn);
+        $passport = handleFileUpload('fileInputPassport', 'passport', $uid, $uploads_dir, $conn);
 
         // Insert payment data into the payments table
         $sql_payment = "INSERT INTO payments (uid, name, amount, utr_number, transaction_date, transaction_time, upi_id)
@@ -131,4 +128,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 echo json_encode($response);
-?>
