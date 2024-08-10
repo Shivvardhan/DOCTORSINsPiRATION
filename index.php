@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Include SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
@@ -84,7 +86,8 @@
                     </div>
                 </section>
                 <section class="form-section" id="section-2">
-                    <button class="back-btn" style="cursor:pointer;width:auto;position: absolute;" type="button" onclick="prevSection(1)"><i class="fa-solid fa-rotate-left"></i></button>
+                    <button class="back-btn" style="cursor:pointer;width:auto;position: absolute;" type="button"
+                        onclick="prevSection(1)"><i class="fa-solid fa-rotate-left"></i></button>
                     <div style="margin-top: 1.5em;">
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
@@ -132,16 +135,22 @@
                 </section>
                 <section class="form-section" id="section-3">
 
-                    <h2 class="upload-head" style="background-color: rgba(80, 167, 221, 1); text-align: center;padding: 0.5em 3em; border-radius: 25px;color:white;">DOCUMENT UPLOAD</h2>
-                    <button class="back-btn" style="cursor:pointer;width:auto;position: absolute;" type="button" onclick="prevSection(2)"><i class="fa-solid fa-rotate-left"></i></button>
-                    <div class="upload-div" style="display: flex;gap:2rem;justify-content: center;text-align: center; margin: 4em 0;">
+                    <h2 class="upload-head"
+                        style="background-color: rgba(80, 167, 221, 1); text-align: center;padding: 0.5em 3em; border-radius: 25px;color:white;">
+                        DOCUMENT UPLOAD</h2>
+                    <button class="back-btn" style="cursor:pointer;width:auto;position: absolute;" type="button"
+                        onclick="prevSection(2)"><i class="fa-solid fa-rotate-left"></i></button>
+                    <div class="upload-div"
+                        style="display: flex;gap:2rem;justify-content: center;text-align: center; margin: 4em 0;">
                         <div class="upload">
                             <h1>HSC MARKSHEET.PDF</h1>
                             <div class="custom-file-upload">
                                 <label for="fileInputHsc">
                                     <div class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
-                                            <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                            <path fill=""
+                                                d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                                                clip-rule="evenodd" fill-rule="evenodd"></path>
                                         </svg>
                                     </div>
                                     <div class="text">
@@ -159,7 +168,9 @@
                                 <label for="fileInputNeet">
                                     <div class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
-                                            <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                            <path fill=""
+                                                d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                                                clip-rule="evenodd" fill-rule="evenodd"></path>
                                         </svg>
                                     </div>
                                     <div class="text">
@@ -179,7 +190,9 @@
                                 <label for="fileInputPassport">
                                     <div class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
-                                            <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                            <path fill=""
+                                                d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                                                clip-rule="evenodd" fill-rule="evenodd"></path>
                                         </svg>
                                     </div>
                                     <div class="text">
@@ -223,7 +236,8 @@
                 </script>
 
                 <section class="form-section" id="section-4">
-                    <button class="back-btn" style="cursor:pointer;width:auto;position: absolute;" type="button" onclick="prevSection(3)"><i class="fa-solid fa-rotate-left"></i></button>
+                    <button class="back-btn" style="cursor:pointer;width:auto;position: absolute;" type="button"
+                        onclick="prevSection(3)"><i class="fa-solid fa-rotate-left"></i></button>
                     <div class="fee-payment">
                         <h2 style="font-size:2.5rem;">FEE PAYMENT</h2>
                         <div class="fees">
@@ -303,38 +317,38 @@
 
 
     <script>
-        // Get the modal
-        const modal = document.getElementById("custom-modal");
+    // Get the modal
+    const modal = document.getElementById("custom-modal");
 
-        // Get the button that opens the modal
-        const payNowBtn = document.querySelector(".pay");
+    // Get the button that opens the modal
+    const payNowBtn = document.querySelector(".pay");
 
-        // Get the <span> element that closes the modal
-        const closeBtn = document.querySelector(".custom-modal-close");
+    // Get the <span> element that closes the modal
+    const closeBtn = document.querySelector(".custom-modal-close");
 
-        // Get the cancel button
-        const cancelBtn = document.querySelector(".custom-modal-cancel");
+    // Get the cancel button
+    const cancelBtn = document.querySelector(".custom-modal-cancel");
 
-        // Open the modal
-        payNowBtn.onclick = function() {
-            modal.style.display = "block";
-        }
+    // Open the modal
+    payNowBtn.onclick = function() {
+        modal.style.display = "block";
+    }
 
-        // Close the modal when the user clicks on <span> (x) or Cancel button
-        closeBtn.onclick = function() {
+    // Close the modal when the user clicks on <span> (x) or Cancel button
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    cancelBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close the modal when the user clicks anywhere outside of the modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
-
-        cancelBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // Close the modal when the user clicks anywhere outside of the modal
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+    }
     </script>
 
     <script>

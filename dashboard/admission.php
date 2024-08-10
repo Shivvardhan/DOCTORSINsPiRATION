@@ -322,6 +322,11 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
 
 </div>
+<?php 
+//Code for checking the mode status
+if($mode['application']!='paid'){
+?>
+
 <!-- Whatsapp Floating Button -->
 <div class=" d-flex">
     <div class="text-float px-12" style="background-color:#A4CBE3;font-size:20px;">
@@ -336,56 +341,119 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 <div class="modal fade" id="payment" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Invitation Letter Payment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Readonly field for displaying student ID -->
-                <h3 class="d-flex justify-content-center">Invitation Letter Fee - 25,000 Rs</h3>
-                <div class="mb-3 d-flex" style="justify-content:center;">
-                    <img src="./assets/image/QR.jpg" alt="QR" height="300px">
+            <form action="#" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Offer Letter Payment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="mb-3">
-                    <label for="studentId" class="form-label">Student ID</label>
-                    <input type="text" class="form-control" id="studentId" name="studentId"
-                        value="<?php echo $_SESSION['uid'];?>" disabled>
-                </div>
-                <div class="mb-3">
-                    <label for="Name" class="form-label">Name</label>
-                    <input type="Text" class="form-control" id="Name" name="name" required>
-                </div>
-                <div class="mb-3">
-                    <label for="Amount" class="form-label">Amount</label>
-                    <input type="number" class="form-control" id="Amount" name="amount" required>
-                </div>
-                <div class="mb-3">
-                    <label for="Utr" class="form-label">UTR Number</label>
-                    <input type="Text" class="form-control" id="Utr" name="utr" required>
-                </div>
-                <div class="mb-3">
-                    <label for="TDate" class="form-label">Transaction Date</label>
-                    <input type="date" class="form-control" id="TDate" name="tdate" required>
-                </div>
-                <div class="mb-3">
-                    <label for="Ttime" class="form-label">Transaction Time</label>
-                    <input type="time" class="form-control" id="Ttime" name="ttime" required>
-                </div>
+                <div class="modal-body">
+                    <!-- Readonly field for displaying student ID -->
+                    <h3 class="d-flex justify-content-center">Offer Letter Fee - 25,000 Rs</h3>
+                    <div class="mb-3 d-flex" style="justify-content:center;">
+                        <img src="./assets/image/QR.jpg" alt="QR" height="300px">
+                    </div>
 
-                <div class="mb-3">
-                    <label for="upi" class="form-label">Your UPI ID</label>
-                    <input type="text" class="form-control" id="upi" name="upi" required>
+                    <div class="mb-3">
+                        <label for="studentId" class="form-label">Student ID</label>
+                        <input type="text" class="form-control" id="studentId" name="uid"
+                            value="<?php echo $_SESSION['uid'];?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Name</label>
+                        <input type="Text" class="form-control" id="Name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Amount" class="form-label">Amount</label>
+                        <input type="text" class="form-control" id="Amount" name="amount" value="25000" disabled
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Utr" class="form-label">UTR Number</label>
+                        <input type="Text" class="form-control" id="Utr" name="utr" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="TDate" class="form-label">Transaction Date</label>
+                        <input type="date" class="form-control" id="TDate" name="tdate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Ttime" class="form-label">Transaction Time</label>
+                        <input type="time" class="form-control" id="Ttime" name="ttime" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="upi" class="form-label">Your UPI ID</label>
+                        <input type="text" class="form-control" id="upi" name="upi" required>
+                    </div>
                 </div>
-            </div>
-            <h5 class="d-flex justify-content-center"><b>Note : Can only be paid once. Please be careful.</b></h5>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success">Pay</button>
-            </div>
+                <h5 class="d-flex justify-content-center"><b>Note : Can only be paid once. Please be careful.</b></h5>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Pay</button>
+                </div>
+            </form>
 
         </div>
     </div>
 </div>
+<?php };?>
+
+<?php 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve form data from the session and POST request
+    $studentId = $_SESSION['uid'];
+    $name = $_POST['name'];
+    $amount = "25000"; // Fixed amount
+    $utr = $_POST['utr'];
+    $tdate = $_POST['tdate'];
+    $ttime = $_POST['ttime'];
+    $upi = $_POST['upi'];
+    $payment_type = "application";
+
+    // SQL statement
+    $sql = "INSERT INTO payments (uid, name, amount, payment_type, utr_number, transaction_date, transaction_time, upi_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    // Prepare the statement
+    if ($stmt = $conn->prepare($sql)) {
+        // Bind parameters
+        $stmt->bind_param("sssssss", $studentId, $name, $amount, $payment_type, $utr, $tdate, $ttime, $upi);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Payment successfull!',
+            }).then(() => {
+            window.location.href = './admission.php';
+            });
+            </script>";
+        } else {
+            echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error inserting payment record: " . $stmt->error . "',
+            });
+            </script>";
+        }
+        $stmt->close();
+    } else {
+        echo "<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Database Error',
+            text: 'Error preparing the statement: " . $conn->error . "',
+        });
+        </script>";
+    }
+}
+?>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <?php require "./component/footer.php";
 } else {
