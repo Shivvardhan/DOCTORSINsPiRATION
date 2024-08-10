@@ -45,11 +45,7 @@
                                 data-kt-menu-placement="bottom-start"
                                 class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2 ">
                                 <!--begin:Menu link-->
-                                <?php if (isset($_SESSION['usertype']) && $_SESSION['usertype'] == "admin") { ?>
 
-
-
-                                <?php } ?>
                                 <div class="poppins" style="color: #151D48;font-weight: 700;font-size: 34px;">
                                     Dashboard
                                 </div>
@@ -223,7 +219,7 @@
                         </div>
                         <!--end::Theme mode-->
                         <!--begin::User menu-->
-                        <div class="notification-container">
+                        <!-- <div class="notification-container">
                             <a href="#">
                                 <div class="notification-button">
                                     <div class="bell-icon">
@@ -232,19 +228,41 @@
                                     <div class="notification-dot"></div>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                         <div class="profile-component">
-                            <img src="https://cdn-icons-png.flaticon.com/512/5987/5987424.png" alt="Profile Image"
-                                class="profile-image">
+                            <img src="https://cdn-icons-png.flaticon.com/512/5987/5987424.png" alt="Profile Image" class="profile-image" onclick="redirectToEditPage()">
                             <div class="profile-info">
-                                <div class="profile-name">
-                                    <?php echo $_SESSION['fname'] ." ". $_SESSION['lname']?>
+                                <div class="profile-name" onclick="redirectToEditPage()">
+                                    <?php echo $_SESSION['fname'] . " " . $_SESSION['lname'] ?>
                                 </div>
-                                <div class="profile-role"><?php if($_SESSION['usertype'] == "admin") {
-                                    echo "Staff";
-                                } else { echo "Student";};?></div>
+                                <div class="profile-role">
+                                    <?php if ($_SESSION['usertype'] == "admin") {
+                                        echo "Staff";
+                                    } else {
+                                        echo "Student";
+                                    }; ?>
+                                </div>
                             </div>
                         </div>
+
+                        <script>
+                            function redirectToEditPage() {
+                                var userType = '<?php echo $_SESSION['usertype']; ?>';
+                                if (userType === 'radmin') {
+                                    window.location.href = 'edit_student_info.php?uid=<?php echo $_SESSION['uid'] ?>';
+                                }
+                            }
+                        </script>
+
+                        <style>
+                            .profile-image,
+                            .profile-name {
+                                cursor: pointer;
+                            }
+                        </style>
+
+
+
                         <!--end::User menu-->
                         <!--begin::Header menu toggle-->
                         <!--end::Header menu toggle-->

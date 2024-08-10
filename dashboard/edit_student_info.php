@@ -260,22 +260,30 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="name">First Name</label>
-                                        <input type="text" class="form-control" id="name" name="fname" value="<?php echo htmlspecialchars($user['fname']); ?>">
+                                        <input type="text" class="form-control" id="name" name="fname" value="<?php echo htmlspecialchars($user['fname']); ?>" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                                                    echo "disabled";
+                                                                                                                                                                } ?>>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="name">Last Name</label>
-                                        <input type="text" class="form-control" id="name" name="lname" value="<?php echo htmlspecialchars($user['lname']); ?>">
+                                        <input type="text" class="form-control" id="name" name="lname" value="<?php echo htmlspecialchars($user['lname']); ?>" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                                                    echo "disabled";
+                                                                                                                                                                } ?>>
                                     </div>
 
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="mobileNo">Mobile No.</label>
-                                        <input type="text" class="form-control" id="mobileNo" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>">
+                                        <input type="text" class="form-control" id="mobileNo" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                                                        echo "disabled";
+                                                                                                                                                                    } ?>>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
+                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                                                        echo "disabled";
+                                                                                                                                                                    } ?>>
                                     </div>
 
                                 </div>
@@ -283,13 +291,17 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
                                     <div class="col-md-12 mb-3">
                                         <label for="address">Address</label>
-                                        <input type="text" class="form-control" id="address" name="address" value="<?php echo htmlspecialchars($user['address_one']); ?>">
+                                        <input type="text" class="form-control" id="address" name="address" value="<?php echo htmlspecialchars($user['address_one']); ?>" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                                                                echo "disabled";
+                                                                                                                                                                            } ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="completionYear">12th Year Of Completion</label>
-                                        <select class="form-control" id="completionYear" name="12_year_of_completeion">
+                                        <select class="form-control" id="completionYear" name="12_year_of_completeion" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                            echo "disabled";
+                                                                                                                        } ?>>
                                             <?php
                                             // Example range of years
                                             for ($year = 2010; $year <= date('Y'); $year++) {
@@ -301,13 +313,17 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="totalMarks12th">12th Total Marks Scored</label>
-                                        <input type="text" class="form-control" id="totalMarks12th" name="12_total_marks_scored" value="<?php echo htmlspecialchars($user['12_total_marks_scored']); ?>">
+                                        <input type="text" class="form-control" id="totalMarks12th" name="12_total_marks_scored" value="<?php echo htmlspecialchars($user['12_total_marks_scored']); ?>" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                                                                                                echo "disabled";
+                                                                                                                                                                                                            } ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="neetYear">NEET Qualification Year</label>
-                                        <select class="form-control" id="neetYear" name="neet_qualification_year">
+                                        <select class="form-control" id="neetYear" name="neet_qualification_year" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                        echo "disabled";
+                                                                                                                    } ?>>
                                             <?php
                                             // Example range of years
                                             for ($year = 2010; $year <= date('Y'); $year++) {
@@ -320,13 +336,17 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 
                                     <div class="col-md-6 mb-3">
                                         <label for="neetMarks">NEET Total Marks Scored</label>
-                                        <input type="text" class="form-control" id="neetMarks" name="neet_total_marks_scored" value="<?php echo htmlspecialchars($user['neet_total_marks_scored']); ?>">
+                                        <input type="text" class="form-control" id="neetMarks" name="neet_total_marks_scored" value="<?php echo htmlspecialchars($user['neet_total_marks_scored']); ?>" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                                                                                            echo "disabled";
+                                                                                                                                                                                                        } ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="itlsQualification">ITLS Exam Qualification</label>
-                                        <select class="form-control" id="itlsQualification" name="ilt_exam_qualification">
+                                        <select class="form-control" id="itlsQualification" name="ilt_exam_qualification" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                echo "disabled";
+                                                                                                                            } ?>>
                                             <option value="Passed" <?php if ($user['ilt_exam_qualification'] == 'Passed') echo 'selected'; ?>>Passed</option>
                                             <option value="Failed" <?php if ($user['ilt_exam_qualification'] == 'Failed') echo 'selected'; ?>>Failed</option>
                                             <option value="Not Attempted" <?php if ($user['ilt_exam_qualification'] == 'Not Attempted') echo 'selected'; ?>>Not Attempted</option>
@@ -334,7 +354,9 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                     </div>
 
                                 </div>
-                                <button type="submit" class="btn btn-primary" name="update_personal" style="background-color: #166572;">Update</button>
+                                <button type="submit" class="btn btn-primary" name="update_personal" style="background-color: #166572;" <?php if ($_SESSION['usertype'] === 'radmin') {
+                                                                                                                                            echo "disabled";
+                                                                                                                                        } ?>>Update</button>
                             </form>
                         </div>
 
@@ -364,21 +386,26 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                                             <i class="fas fa-download"></i>
                                                         </a>
                                                     <?php endif; ?>
-                                                    <form id="uploadFormHsc" action="./phpdata/upload_user_docs.php" method="POST" enctype="multipart/form-data" style="display: flex;">
-                                                        <input type="hidden" name="uid" value="<?php echo $user['uid']; ?>">
-                                                        <input type="hidden" name="file_type" value="hsc_marksheet_pdf">
-                                                        <input type="file" name="file" id="fileInputHsc" accept="application/pdf" style="display: none;">
-                                                        <button type="button" class="btn btn-secondary btn-sm" title="Upload" onclick="document.getElementById('fileInputHsc').click();">
-                                                            <i class="fas fa-upload"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    <?php if ($_SESSION['usertype'] !== 'radmin') : ?>
+                                                        <form id="uploadFormHsc" action="./phpdata/upload_user_docs.php" method="POST" enctype="multipart/form-data" style="display: flex;">
+                                                            <input type="hidden" name="uid" value="<?php echo $user['uid']; ?>">
+                                                            <input type="hidden" name="file_type" value="hsc_marksheet_pdf">
+                                                            <input type="file" name="file" id="fileInputHsc" accept="application/pdf" style="display: none;">
+                                                            <button type="button" class="btn btn-secondary btn-sm" title="Upload" onclick="document.getElementById('fileInputHsc').click();">
+                                                                <i class="fas fa-upload"></i>
+                                                            </button>
+                                                        </form>
+                                                    <?php endif; ?>
                                                 </div>
+
                                                 <script>
                                                     document.getElementById('fileInputHsc').addEventListener('change', function() {
                                                         document.getElementById('uploadFormHsc').submit();
                                                     });
                                                 </script>
                                             </td>
+
                                         </tr>
                                         <tr>
                                             <td><?php echo !empty($user['neet_marksheet_pdf']) ? htmlspecialchars($user['neet_marksheet_pdf']) : 'Neet marksheet'; ?></td>
@@ -390,21 +417,26 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                                             <i class="fas fa-download"></i>
                                                         </a>
                                                     <?php endif; ?>
-                                                    <form id="uploadFormNeet" action="./phpdata/upload_user_docs.php" method="POST" enctype="multipart/form-data" style="display: flex;">
-                                                        <input type="hidden" name="uid" value="<?php echo $user['uid']; ?>">
-                                                        <input type="hidden" name="file_type" value="neet_marksheet_pdf">
-                                                        <input type="file" name="file" id="fileInputNeet" accept="application/pdf" style="display: none;">
-                                                        <button type="button" class="btn btn-secondary btn-sm" title="Upload" onclick="document.getElementById('fileInputNeet').click();">
-                                                            <i class="fas fa-upload"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    <?php if ($_SESSION['usertype'] !== 'radmin') : ?>
+                                                        <form id="uploadFormNeet" action="./phpdata/upload_user_docs.php" method="POST" enctype="multipart/form-data" style="display: flex;">
+                                                            <input type="hidden" name="uid" value="<?php echo $user['uid']; ?>">
+                                                            <input type="hidden" name="file_type" value="neet_marksheet_pdf">
+                                                            <input type="file" name="file" id="fileInputNeet" accept="application/pdf" style="display: none;">
+                                                            <button type="button" class="btn btn-secondary btn-sm" title="Upload" onclick="document.getElementById('fileInputNeet').click();">
+                                                                <i class="fas fa-upload"></i>
+                                                            </button>
+                                                        </form>
+                                                    <?php endif; ?>
                                                 </div>
+
                                                 <script>
                                                     document.getElementById('fileInputNeet').addEventListener('change', function() {
                                                         document.getElementById('uploadFormNeet').submit();
                                                     });
                                                 </script>
                                             </td>
+
                                         </tr>
                                         <tr>
                                             <td><?php echo !empty($user['passport_pdf']) ? htmlspecialchars($user['passport_pdf']) : 'Passport'; ?></td>
@@ -416,21 +448,26 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                                             <i class="fas fa-download"></i>
                                                         </a>
                                                     <?php endif; ?>
-                                                    <form id="uploadFormPassport" action="./phpdata/upload_user_docs.php" method="POST" enctype="multipart/form-data" style="display: flex;">
-                                                        <input type="hidden" name="uid" value="<?php echo $user['uid']; ?>">
-                                                        <input type="hidden" name="file_type" value="passport_pdf">
-                                                        <input type="file" name="file" id="fileInputPassport" accept="application/pdf" style="display: none;">
-                                                        <button type="button" class="btn btn-secondary btn-sm" title="Upload" onclick="document.getElementById('fileInputPassport').click();">
-                                                            <i class="fas fa-upload"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    <?php if ($_SESSION['usertype'] !== 'radmin') : ?>
+                                                        <form id="uploadFormPassport" action="./phpdata/upload_user_docs.php" method="POST" enctype="multipart/form-data" style="display: flex;">
+                                                            <input type="hidden" name="uid" value="<?php echo $user['uid']; ?>">
+                                                            <input type="hidden" name="file_type" value="passport_pdf">
+                                                            <input type="file" name="file" id="fileInputPassport" accept="application/pdf" style="display: none;">
+                                                            <button type="button" class="btn btn-secondary btn-sm" title="Upload" onclick="document.getElementById('fileInputPassport').click();">
+                                                                <i class="fas fa-upload"></i>
+                                                            </button>
+                                                        </form>
+                                                    <?php endif; ?>
                                                 </div>
+
                                                 <script>
                                                     document.getElementById('fileInputPassport').addEventListener('change', function() {
                                                         document.getElementById('uploadFormPassport').submit();
                                                     });
                                                 </script>
                                             </td>
+
                                         </tr>
                                         <!-- Add more rows as needed -->
                                     </tbody>
