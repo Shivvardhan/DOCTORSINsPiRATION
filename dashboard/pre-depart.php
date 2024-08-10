@@ -288,6 +288,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
             
             if ($result->num_rows == 1) {
                 while($row = $result->fetch_assoc()) {
+                    $session_time = DateTime::createFromFormat('H:i:s', $row['session_time'])->format('h:i A');
               ?>
             <!-- After Session details are updated by staff account -->
             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
@@ -306,7 +307,7 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         </div>
                         <div class="col-5 mx-4">
                             <div class="poppins info-text">
-                                Session Time: <?php echo $row['session_time'];?>
+                                Session Time: <?php echo $session_time;?>
                             </div>
                         </div>
                     </div>
@@ -347,23 +348,23 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
             ?>
             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
 
-<div class="poppins info-head">
-    Session Details:
-</div>
-<div style="background-color:#DFE7E8;"
-    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
-    <!--begin::Label-->
-    <div class="row" style="align-items:center;">
-        <div class="col-10 mx-4">
-            <div class="poppins info-text">
-                Session Has Not been Scheduled
+                <div class="poppins info-head">
+                    Session Details:
+                </div>
+                <div style="background-color:#DFE7E8;"
+                    class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
+                    <!--begin::Label-->
+                    <div class="row" style="align-items:center;">
+                        <div class="col-10 mx-4">
+                            <div class="poppins info-text">
+                                Session Has Not been Scheduled
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Label-->
+                </div>
             </div>
-        </div>
-    </div>
-    <!--end::Label-->
-</div>
-</div> 
-<?php };?>
+            <?php };?>
         </div>
 
     </div>
