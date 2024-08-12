@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         return ['status' => 'success', 'fileName' => '']; // No file uploaded, return empty fileName
     }
-    
+
     // Start a transaction
     $conn->begin_transaction();
 
@@ -117,8 +117,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passport = $passport_result['fileName'];
 
         // Insert payment data into the payments table
-        $sql_payment = "INSERT INTO payments (uid, name, amount, utr_number, transaction_date, transaction_time, upi_id)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql_payment = "INSERT INTO payments (uid, name, amount, utr_number, transaction_date, transaction_time, upi_id, payment_status)
+                        VALUES (?, ?, ?, ?, ?, ?, ? , 'register')";
         if ($stmt = $conn->prepare($sql_payment)) {
             $stmt->bind_param("issssss", $uid, $payment_name, $amount, $utr, $transaction_date, $transaction_time, $upi);
             if (!$stmt->execute()) {

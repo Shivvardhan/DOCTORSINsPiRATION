@@ -13,8 +13,8 @@ $start = isset($_POST['start']) ? intval($_POST['start']) : 0;
 $length = isset($_POST['length']) ? intval($_POST['length']) : 10;
 $search = isset($_POST['search']['value']) ? $_POST['search']['value'] : '';
 
-// Base SQL query to count total records
-$sql = "SELECT COUNT(*) as total FROM payments WHERE payment_status IS NULL OR payment_status = ''";
+// Base SQL query to count total records with payment_status 'ACCEPTED'
+$sql = "SELECT COUNT(*) as total FROM payments WHERE payment_status = 'ACCEPTED'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $totalData = $row['total'];
@@ -23,8 +23,8 @@ $totalData = $row['total'];
 $params = [];
 $types = "";
 
-// Initializing the where clause with the condition for payment_status
-$whereClause = "WHERE (payment_status IS NULL OR payment_status = '')";
+// Initialize the where clause with the condition for payment_status 'ACCEPTED'
+$whereClause = "WHERE payment_status = 'ACCEPTED'";
 
 if (!empty($search)) {
     $searchTerm = "%$search%";
@@ -58,7 +58,6 @@ $result = $stmt->get_result();
 $data = [];
 while ($row = $result->fetch_assoc()) {
     $data[] = [
-        $row['sno'],
         $row['uid'],
         $row['name'],
         $row['amount'],
@@ -67,17 +66,7 @@ while ($row = $result->fetch_assoc()) {
         $row['transaction_date'],
         $row['transaction_time'],
         $row['upi_id'],
-        '<div class="d-flex" style="gap:10px;">
-        <button type="button" class="btn btn-success edit-btn">
-            Accept
-        </button>
-        <button type="button" class="btn btn-danger edit-btn">
-            Decline
-        </button>
-        </div>',
-        $row['timestamp']
-      
-
+        $row['timestamp'],
     ];
 }
 

@@ -198,7 +198,6 @@ body {
                         <th scope="col">Transaction Date</th>
                         <th scope="col">Transaction Time</th>
                         <th scope="col">UPI ID</th>
-                        <th scope="col">Payment Status</th>
                         <th scope="col">Timestamp</th>
                     </tr>
                 </thead>
@@ -216,41 +215,21 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: {
-            url: './phpdata/student_status_data.php',
+            url: './phpdata/success_payments.php',
             type: 'POST'
         },
-        columns: [{
-                data: 0
-            }, // Student ID
-            {
-                data: 1
-            }, // Name
-            {
-                data: 2
-            }, // Amount
-            {
-                data: 3
-            }, // Payment_type
-            {
-                data: 4
-            }, // UTR Number
-            {
-                data: 5
-            }, // Transaction Date
-            {
-                data: 6
-            }, // Tansaction time
-            {
-                data: 7
-            }, // UPI ID
-            {
-                data: 8
-            }, // Payment Status 
-            {
-                data: 9
-            }, // Timestamp
-
+        columns: [
+            { data: 0 }, // Student ID
+            { data: 1 }, // Name
+            { data: 2 }, // Amount
+            { data: 3 }, // Payment_type
+            { data: 4 }, // UTR Number
+            { data: 5 }, // Transaction Date
+            { data: 6 }, // Transaction Time
+            { data: 7 }, // UPI ID
+            { data: 8 }  // Timestamp
         ],
+        
         language: {
             paginate: {
                 first: 'First',
@@ -269,6 +248,7 @@ $(document).ready(function() {
         table.search($('.dataTables_filter input').val()).draw();
     });
 });
+
 
 
 function openEditModal(uid, currentStatus) {
