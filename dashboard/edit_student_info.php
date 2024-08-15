@@ -188,7 +188,10 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
             // Hide all sections
             document.getElementById('personal-details').style.display = 'none';
             document.getElementById('document-details').style.display = 'none';
+
+            <?php if ($_SESSION['usertype'] === 'radmin') { ?>
             document.getElementById('enrollement-process').style.display = 'none';
+            <?php } ?>
             // Show the selected section
             document.getElementById(sectionId).style.display = 'block';
         }
