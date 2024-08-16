@@ -14,6 +14,31 @@
 
     <!-- Include SweetAlert2 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <style>
+        .swal-title {
+            font-size: 1.5em !important;
+            text-transform: uppercase;
+            /* Ensure the title is in uppercase if needed */
+        }
+
+        .swal-content {
+            font-size: 1em !important;
+        }
+
+        .swal2-html-container {
+            white-space: pre-wrap;
+            /* Ensure the text wraps correctly */
+            text-transform: capitalize;
+            /* Capitalize the first letter of each word */
+        }
+
+        .swal2-popup {
+            font-family: Arial, sans-serif;
+            /* Set a consistent font family */
+        }
+    </style>
+
+
 
 </head>
 
@@ -39,37 +64,37 @@
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="fname">FIRST NAME:</label>
-                                <input type="text" id="fname" name="fname">
+                                <input type="text" id="fname" name="fname" required>
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="lname">LAST NAME:</label>
-                                <input type="text" id="lname" name="lname">
+                                <input type="text" id="lname" name="lname" required>
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="address">ADDRESS:</label>
-                                <input type="text" id="address" name="address">
+                                <input type="text" id="address" name="address" required>
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="year-of-completion">12TH YEAR OF COMPLETION:</label>
-                                <input type="number" id="year-of-completion" name="year-of-completion">
+                                <input type="number" id="year-of-completion" name="year-of-completion" required>
                             </div>
                         </div>
                         <div style="display: flex;justify-content: center;">
                             <div class="form-group">
                                 <label for="total-marks">12TH TOTAL MARKS SCORED:</label>
-                                <input type="number" id="total-marks" name="total-marks">
+                                <input type="number" id="total-marks" name="total-marks" required>
                             </div>
                         </div>
                         <div style="display: flex; justify-content: center;">
                             <div class="form-group">
                                 <label for="ilts-qualification">IELTS EXAM QUALIFICATION:</label>
-                                <select id="ilts-qualification" name="ilts-qualification" class="form-control">
+                                <select id="ilts-qualification" name="ilts-qualification" class="form-control" required>
                                     <option value="">Select...</option>
                                     <option value="Passed">Passed</option>
                                     <option value="Failed">Failed</option>
@@ -317,38 +342,38 @@
 
 
     <script>
-    // Get the modal
-    const modal = document.getElementById("custom-modal");
+        // Get the modal
+        const modal = document.getElementById("custom-modal");
 
-    // Get the button that opens the modal
-    const payNowBtn = document.querySelector(".pay");
+        // Get the button that opens the modal
+        const payNowBtn = document.querySelector(".pay");
 
-    // Get the <span> element that closes the modal
-    const closeBtn = document.querySelector(".custom-modal-close");
+        // Get the <span> element that closes the modal
+        const closeBtn = document.querySelector(".custom-modal-close");
 
-    // Get the cancel button
-    const cancelBtn = document.querySelector(".custom-modal-cancel");
+        // Get the cancel button
+        const cancelBtn = document.querySelector(".custom-modal-cancel");
 
-    // Open the modal
-    payNowBtn.onclick = function() {
-        modal.style.display = "block";
-    }
+        // Open the modal
+        payNowBtn.onclick = function() {
+            modal.style.display = "block";
+        }
 
-    // Close the modal when the user clicks on <span> (x) or Cancel button
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    cancelBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Close the modal when the user clicks anywhere outside of the modal
-    window.onclick = function(event) {
-        if (event.target == modal) {
+        // Close the modal when the user clicks on <span> (x) or Cancel button
+        closeBtn.onclick = function() {
             modal.style.display = "none";
         }
-    }
+
+        cancelBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal when the user clicks anywhere outside of the modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 
     <script>
@@ -359,8 +384,11 @@
         }
 
         function nextSection(sectionId) {
+            const currentSectionId = `section-${sectionId - 1}`;
+            const nextSectionId = `section-${sectionId }`;
+
             if (sectionId === 3) {
-                // Validate password and confirm password
+                // Validate password and confirm password in section 3
                 const password = document.getElementById('password').value;
                 const confirmPassword = document.getElementById('re-password').value;
 
@@ -369,8 +397,57 @@
                     return;
                 }
             }
-            showSection(sectionId);
+
+            if (validateSection(currentSectionId)) {
+                showSection(    );
+            }
         }
+
+        function validateSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            let isValid = true;
+            let missingFields = [];
+
+            const inputs = section.querySelectorAll('input[required], select[required]');
+            inputs.forEach(input => {
+                if (input.type === 'file') {
+                    // File validation is handled separately
+                    return;
+                }
+                if (!input.value) {
+                    isValid = false;
+                    const label = input.previousElementSibling.textContent.trim();
+                    const fieldName = label.replace(/:$/, '').trim(); // Remove trailing colon and trim
+                    missingFields.push(fieldName);
+                    input.style.borderColor = 'red';
+                    input.addEventListener('input', () => input.style.borderColor = '');
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+
+            if (!isValid) {
+                const formattedFields = missingFields.map(field =>
+                    field.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
+                ).join(', ');
+
+                Swal.fire({
+                    title: 'Incomplete Form',
+                    html: `Please fill out the following fields: <strong>${formattedFields}</strong>`,
+                    icon: 'warning',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content'
+                    }
+                });
+            }
+
+            return isValid;
+        }
+
+
+
 
         function prevSection(sectionId) {
             showSection(sectionId);
