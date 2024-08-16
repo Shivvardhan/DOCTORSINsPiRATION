@@ -177,7 +177,7 @@ body {
                 <li class="breadcrumb-item">
                     <span class="bullet bg-gray-400 w-5px h-2px"></span>
                 </li>
-                <li class="breadcrumb-item text-muted">Students Status</li>
+                <li class="breadcrumb-item text-muted">Successfull Payment</li>
             </ul>
         </div>
     </div>
@@ -218,18 +218,35 @@ $(document).ready(function() {
             url: './phpdata/success_payments.php',
             type: 'POST'
         },
-        columns: [
-            { data: 0 }, // Student ID
-            { data: 1 }, // Name
-            { data: 2 }, // Amount
-            { data: 3 }, // Payment_type
-            { data: 4 }, // UTR Number
-            { data: 5 }, // Transaction Date
-            { data: 6 }, // Transaction Time
-            { data: 7 }, // UPI ID
-            { data: 8 }  // Timestamp
+        columns: [{
+                data: 0
+            }, // Student ID
+            {
+                data: 1
+            }, // Name
+            {
+                data: 2
+            }, // Amount
+            {
+                data: 3
+            }, // Payment_type
+            {
+                data: 4
+            }, // UTR Number
+            {
+                data: 5
+            }, // Transaction Date
+            {
+                data: 6
+            }, // Transaction Time
+            {
+                data: 7
+            }, // UPI ID
+            {
+                data: 8
+            } // Timestamp
         ],
-        
+
         language: {
             paginate: {
                 first: 'First',

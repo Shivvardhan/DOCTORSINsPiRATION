@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                                 <div></div>
                                 <!--begin::Link-->
-                                <a href="reset.php" class="link-primary">Forgot Password ?</a>
+                                <!-- <a href="reset.php" class="link-primary">Forgot Password ?</a> -->
                                 <!--end::Link-->
                             </div>
                             <!--end::Wrapper-->

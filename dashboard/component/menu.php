@@ -179,7 +179,7 @@
                     </div>
 
                     <!-- Sign Out Section -->
-                    <div style="position:absolute;bottom:0;">
+                    <div>
                         <div class="menu-item">
                             <a class="menu-link" href="logout.php">
                                 <span class="menu-icon">

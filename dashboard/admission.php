@@ -327,15 +327,40 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
 if($mode['application']!='paid'){
 ?>
 
-<!-- Whatsapp Floating Button -->
-<div class=" d-flex">
-    <div class="text-float px-12" style="background-color:#A4CBE3;font-size:20px;">
-        Pay Fees for Access Invitation Letter
+<?php
+$uid = $_SESSION['uid'];
+
+// Prepare the SQL statement
+$sql = "SELECT * FROM `payments` WHERE uid = ? AND payment_type = 'application'";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $uid);
+$stmt->execute();
+
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+if ($row && empty($row['payment_status'])) {
+// Payment is in process or pending
+$message = "Payment for Offer Letter In Process";
+$showPaymentButton = false;
+} else {
+// Payment is not yet done
+$message = "Pay Fees for Access Offer Letter";
+$showPaymentButton = true;
+}
+?>
+
+<div class="d-flex">
+    <div class="text-float px-12" style="background-color:#A4CBE3; font-size:20px;">
+        <?php echo $message; ?>
     </div>
+    <?php if ($showPaymentButton): ?>
     <a href="#" data-bs-toggle="modal" data-bs-target="#payment" style="background-color:#18618E;"
         class="whatsapp-float">
-        <i style="color:white;font-size:25px;" class="fa-solid fa-money-bill-wave"></i>
+        <i style="color:white; font-size:25px;" class="fa-solid fa-money-bill-wave"></i>
     </a>
+    <?php endif; ?>
 </div>
 
 <div class="modal fade" id="payment" tabindex="-1" aria-hidden="true">
@@ -348,7 +373,7 @@ if($mode['application']!='paid'){
                 </div>
                 <div class="modal-body">
                     <!-- Readonly field for displaying student ID -->
-                    <h3 class="d-flex justify-content-center">Offer Letter Fee - 25,000 Rs</h3>
+                    <h3 class="d-flex justify-content-center">Offer Letter Fee - 50,000 Rs</h3>
                     <div class="mb-3 d-flex" style="justify-content:center;">
                         <img src="./assets/image/QR.jpg" alt="QR" height="300px">
                     </div>
@@ -364,7 +389,7 @@ if($mode['application']!='paid'){
                     </div>
                     <div class="mb-3">
                         <label for="Amount" class="form-label">Amount</label>
-                        <input type="text" class="form-control" id="Amount" name="amount" value="25000" disabled
+                        <input type="text" class="form-control" id="Amount" name="amount" value="50000" disabled
                             required>
                     </div>
                     <div class="mb-3">
@@ -395,28 +420,27 @@ if($mode['application']!='paid'){
         </div>
     </div>
 </div>
-<?php };?>
 
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve form data from the session and POST request
     $studentId = $_SESSION['uid'];
     $name = $_POST['name'];
-    $amount = "25000"; // Fixed amount
+    $amount = "50000"; // Fixed amount
+    $payment_type = "application";
     $utr = $_POST['utr'];
     $tdate = $_POST['tdate'];
     $ttime = $_POST['ttime'];
     $upi = $_POST['upi'];
-    $payment_type = "application";
 
     // SQL statement
     $sql = "INSERT INTO payments (uid, name, amount, payment_type, utr_number, transaction_date, transaction_time, upi_id) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
 
     // Prepare the statement
     if ($stmt = $conn->prepare($sql)) {
         // Bind parameters
-        $stmt->bind_param("sssssss", $studentId, $name, $amount, $payment_type, $utr, $tdate, $ttime, $upi);
+        $stmt->bind_param("ssssssss", $studentId, $name, $amount, $payment_type, $utr, $tdate, $ttime, $upi);
 
         // Execute the statement
         if ($stmt->execute()) {
@@ -426,7 +450,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 title: 'Success',
                 text: 'Payment successfull!',
             }).then(() => {
-            window.location.href = './admission.php';
+            window.location.href = './invitation_letter_dash.php';
             });
             </script>";
         } else {
@@ -448,7 +472,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
         </script>";
     }
-}
+
+} }
 ?>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

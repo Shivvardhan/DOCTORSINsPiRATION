@@ -41,12 +41,19 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $totalFiltered = $row['totalFiltered'];
 
-// Fetch the records with the applied filters, limits, and orders
-$sql = "SELECT uid, CONCAT(fname, ' ', lname) AS name, phone, 'Active' as status, 0.00 as fees_paid, timestamp as date_of_registration 
-        FROM users $whereClause LIMIT ?, ?";
-$params = array_merge($params, [$start, $length]);
-$types .= "ii"; // Adding types for LIMIT parameters
+// Updated query to include the necessary columns from the mode table
+$sql = "SELECT u.uid, CONCAT(u.fname, ' ', u.lname) AS name, u.phone, 
+               m.register, m.application, m.invitation_letter, m.pre_depart,
+               0.00 as fees_paid, u.timestamp as date_of_registration 
+        FROM users u
+        LEFT JOIN mode m ON u.uid = m.uid
+        $whereClause LIMIT ?, ?";
 
+// Add LIMIT parameters to $params array and types
+$params = array_merge($params, [$start, $length]);
+$types .= "ii";
+
+// Prepare and execute the SQL statement
 $stmt = $conn->prepare($sql);
 $stmt->bind_param($types, ...$params);
 $stmt->execute();
@@ -54,12 +61,30 @@ $result = $stmt->get_result();
 
 $data = [];
 while ($row = $result->fetch_assoc()) {
+    // Determine the status based on the conditions
+    $status = 'UnActive'; // Default status
+
+    if ($row['register'] != "paid") {
+        $status = "Registered";
+    } elseif ($row['application'] != "paid") {
+        $status = "Offer Letter";
+    } elseif ($row['invitation_letter'] != "paid") {
+        $status = "Invitation Letter";
+    } elseif ($row['pre_depart'] != "paid") {
+        $status = "Pre-Departure";
+    } else {
+        $status = "Post-Departure";
+    }
+    
+
     // Format the date
     $formattedDate = date('d-m-Y', strtotime($row['date_of_registration']));
+
+    // Add the data to the array
     $data[] = [
         $row['name'],
         $row['phone'],
-        '<button type="button" class="btn btn-dark status-btn">'.$row['status'].'</button>',
+        '<button type="button" class="btn btn-dark status-btn">'.$status.'</button>', // Use dynamic status
         $row['fees_paid'],
         $formattedDate, // Use the formatted date here
         '<a href="edit_student_info.php?uid='.$row['uid'].'" class="btn btn-dark edit-btn">
