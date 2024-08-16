@@ -399,7 +399,7 @@
             }
 
             if (validateSection(currentSectionId)) {
-                showSection(    );
+                showSection(sectionId);
             }
         }
 
