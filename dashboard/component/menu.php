@@ -85,7 +85,7 @@
                         <a class="menu-link" href="pending_payment.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-tasks"></i>
+                                <i class="fa-solid fa-clock"></i>
                                 </span>
                             </span>
                             <span class="menu-title">Pending Payment</span>
@@ -95,10 +95,20 @@
                         <a class="menu-link" href="successful_payment.php">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-tasks"></i>
+                                <i class="fa-solid fa-check-circle"></i>
                                 </span>
                             </span>
                             <span class="menu-title">Successful Payment</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link" href="faild_payment.php">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                <i class="fa-solid fa-times-circle"></i>
+                                </span>
+                            </span>
+                            <span class="menu-title">Faild Payment</span>
                         </a>
                     </div>
 
