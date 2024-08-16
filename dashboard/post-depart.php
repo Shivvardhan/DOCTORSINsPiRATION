@@ -180,8 +180,9 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         font-size: 11px !important;
     }
 }
-.link:hover{
-    text-decoration:underline;
+
+.link:hover {
+    text-decoration: underline;
 }
 </style>
 
@@ -236,26 +237,27 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
         <div class="row g-3 g-xl-10 mb-3 me-6 m mb-xl-3">
 
             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-12 mb-md-6 mb-xl-3">
-                <div class="col-12 mt-10 mb-4" style="border:1px solid black;">
-                </div>
 
-                <div class="poppins info-head">
+
+                <div class="poppins info-head mb-2">
                     SERVICE LIST
+                </div>
+                <div class="col-12 mb-8" style="border:1px solid black;">
                 </div>
                 <div style="background-color:#DFE7E8;"
                     class=" border border-gray-300 border-dashed rounded info min-w-125px py-10 px-4 mb-3">
                     <!--begin::Label-->
                     <div class="row" style="align-items:center;">
                         <div class="col-10 mx-4 px-8" style="height:20rem;">
-                        <a href="./assets/docs/doc1.pdf" target="_blank">
-                            <div class="link poppins info-text mb-4" style="color:#166572;">
-                            Services Provided By Doctorinspiration                            </div>
-                        </a>
-                        <a href="./assets/docs/doc2.pdf" target="_blank">
-                            <div class="link poppins info-text mt-2" style="color:#166572;">
-                                Fee Structure For KBSU
-                            </div>
-                        </a>
+                            <a href="./assets/docs/doc1.pdf" target="_blank">
+                                <div class="link poppins info-text mb-4" style="color:#166572;">
+                                    Services Provided By Doctorinspiration </div>
+                            </a>
+                            <a href="./assets/docs/doc2.pdf" target="_blank">
+                                <div class="link poppins info-text mt-2" style="color:#166572;">
+                                    Fee Structure For KBSU
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <!--end::Label-->
