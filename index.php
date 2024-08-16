@@ -181,7 +181,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputHsc" name="fileInputHsc" onchange="showFileName('fileInputHsc', 'fileNameHsc')" required accept=".pdf">
+                                    <input type="file" id="fileInputHsc" name="fileInputHsc" onchange="showFileName('fileInputHsc', 'fileNameHsc')" required accept=".pdf" data-field-name="HSC Marksheet">
                                 </label>
                             </div>
                             <br>
@@ -201,7 +201,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputNeet" name="fileInputNeet" onchange="showFileName('fileInputNeet', 'fileNameNeet')" required accept=".pdf">
+                                    <input type="file" id="fileInputNeet" name="fileInputNeet" onchange="showFileName('fileInputNeet', 'fileNameNeet')" required accept=".pdf" data-field-name="NEET Marksheet">
                                 </label>
                             </div>
                             <br>
@@ -223,7 +223,7 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputPassport" name="fileInputPassport" onchange="showFileName('fileInputPassport', 'fileNamePassport')" required accept=".pdf">
+                                    <input type="file" id="fileInputPassport" name="fileInputPassport" onchange="showFileName('fileInputPassport', 'fileNamePassport')" required accept=".pdf" data-field-name="Passport">
                                 </label>
                             </div>
                             <br>
@@ -411,9 +411,22 @@
             const inputs = section.querySelectorAll('input[required], select[required]');
             inputs.forEach(input => {
                 if (input.type === 'file') {
-                    // File validation is handled separately
+                    if (input.files.length === 0) {
+                        isValid = false;
+                        const fieldName = input.getAttribute('data-field-name'); // Get the specific field name
+                        if (fieldName) {
+                            missingFields.push(fieldName);
+                        } else {
+                            missingFields.push("File Input"); // Default name if not set
+                        }
+                        input.style.borderColor = 'red';
+                        input.addEventListener('change', () => input.style.borderColor = '');
+                    } else {
+                        input.style.borderColor = '';
+                    }
                     return;
                 }
+
                 if (!input.value) {
                     isValid = false;
                     const label = input.previousElementSibling.textContent.trim();
@@ -445,6 +458,8 @@
 
             return isValid;
         }
+
+
 
 
 
