@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Collect payment form data
     $payment_name = $_POST['name'] ?? $full_name; // Use full name by default if payment name is not provided
-    $amount = $_POST['amounts'] ?? 0;
+    $amount = '10000';
     $utr = $_POST['utr'] ?? '';
     $tdate = $_POST['tdate'] ?? '';
     $ttime = $_POST['ttime'] ?? '';

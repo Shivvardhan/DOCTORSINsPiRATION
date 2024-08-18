@@ -63,17 +63,23 @@ $data = [];
 while ($row = $result->fetch_assoc()) {
     // Determine the status based on the conditions
     $status = 'UnActive'; // Default status
+    $fees = '0';
 
     if ($row['register'] != "paid") {
         $status = "Registered";
+        $fees = '10,000';
     } elseif ($row['application'] != "paid") {
         $status = "Offer Letter";
+        $fees = '60,000';
     } elseif ($row['invitation_letter'] != "paid") {
         $status = "Invitation Letter";
+        $fees = '110,000';
     } elseif ($row['pre_depart'] != "paid") {
         $status = "Pre-Departure";
+        $fees = '110,000';
     } else {
         $status = "Post-Departure";
+        $fees = '110,000';
     }
     
 
@@ -85,7 +91,7 @@ while ($row = $result->fetch_assoc()) {
         $row['name'],
         $row['phone'],
         '<button type="button" class="btn btn-dark status-btn">'.$status.'</button>', // Use dynamic status
-        $row['fees_paid'],
+        $fees,
         $formattedDate, // Use the formatted date here
         '<a href="edit_student_info.php?uid='.$row['uid'].'" class="btn btn-dark edit-btn">
             <i class="fa fa-pencil-alt"></i> Edit
