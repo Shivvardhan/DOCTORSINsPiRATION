@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="./dashboard/assets/image/logo_1.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,27 +16,27 @@
     <!-- Include SweetAlert2 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <style>
-        .swal-title {
-            font-size: 1.5em !important;
-            text-transform: uppercase;
-            /* Ensure the title is in uppercase if needed */
-        }
+    .swal-title {
+        font-size: 1.5em !important;
+        text-transform: uppercase;
+        /* Ensure the title is in uppercase if needed */
+    }
 
-        .swal-content {
-            font-size: 1em !important;
-        }
+    .swal-content {
+        font-size: 1em !important;
+    }
 
-        .swal2-html-container {
-            white-space: pre-wrap;
-            /* Ensure the text wraps correctly */
-            text-transform: capitalize;
-            /* Capitalize the first letter of each word */
-        }
+    .swal2-html-container {
+        white-space: pre-wrap;
+        /* Ensure the text wraps correctly */
+        text-transform: capitalize;
+        /* Capitalize the first letter of each word */
+    }
 
-        .swal2-popup {
-            font-family: Arial, sans-serif;
-            /* Set a consistent font family */
-        }
+    .swal2-popup {
+        font-family: Arial, sans-serif;
+        /* Set a consistent font family */
+    }
     </style>
 
 
@@ -181,7 +182,9 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputHsc" name="fileInputHsc" onchange="showFileName('fileInputHsc', 'fileNameHsc')" required accept=".pdf" data-field-name="HSC Marksheet">
+                                    <input type="file" id="fileInputHsc" name="fileInputHsc"
+                                        onchange="showFileName('fileInputHsc', 'fileNameHsc')" required accept=".pdf"
+                                        data-field-name="HSC Marksheet">
                                 </label>
                             </div>
                             <br>
@@ -201,7 +204,9 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputNeet" name="fileInputNeet" onchange="showFileName('fileInputNeet', 'fileNameNeet')" required accept=".pdf" data-field-name="NEET Marksheet">
+                                    <input type="file" id="fileInputNeet" name="fileInputNeet"
+                                        onchange="showFileName('fileInputNeet', 'fileNameNeet')" required accept=".pdf"
+                                        data-field-name="NEET Marksheet">
                                 </label>
                             </div>
                             <br>
@@ -223,7 +228,9 @@
                                     <div class="text">
                                         <span>Click to upload file</span>
                                     </div>
-                                    <input type="file" id="fileInputPassport" name="fileInputPassport" onchange="showFileName('fileInputPassport', 'fileNamePassport')" required accept=".pdf" data-field-name="Passport">
+                                    <input type="file" id="fileInputPassport" name="fileInputPassport"
+                                        onchange="showFileName('fileInputPassport', 'fileNamePassport')" required
+                                        accept=".pdf" data-field-name="Passport">
                                 </label>
                             </div>
                             <br>
@@ -239,25 +246,25 @@
                 </section>
 
                 <script>
-                    function showFileName(inputId, fileNameId) {
-                        const fileInput = document.getElementById(inputId);
-                        const fileNameDiv = document.getElementById(fileNameId);
+                function showFileName(inputId, fileNameId) {
+                    const fileInput = document.getElementById(inputId);
+                    const fileNameDiv = document.getElementById(fileNameId);
 
-                        if (fileInput.files.length > 0) {
-                            const file = fileInput.files[0];
-                            const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+                    if (fileInput.files.length > 0) {
+                        const file = fileInput.files[0];
+                        const maxSize = 2 * 1024 * 1024; // 2MB in bytes
 
-                            if (file.size > maxSize) {
-                                alert('File size exceeds 2MB. Please choose a smaller file.');
-                                fileInput.value = ''; // Clear the input
-                                fileNameDiv.textContent = 'No file selected';
-                            } else {
-                                fileNameDiv.textContent = '' + file.name;
-                            }
-                        } else {
+                        if (file.size > maxSize) {
+                            alert('File size exceeds 2MB. Please choose a smaller file.');
+                            fileInput.value = ''; // Clear the input
                             fileNameDiv.textContent = 'No file selected';
+                        } else {
+                            fileNameDiv.textContent = '' + file.name;
                         }
+                    } else {
+                        fileNameDiv.textContent = 'No file selected';
                     }
+                }
                 </script>
 
                 <section class="form-section" id="section-4">
@@ -306,7 +313,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="Amount" class="form-label">Amount</label>
-                        <input type="number" class="form-control" id="Amount" name="amounts" required value="10000" disabled>
+                        <input type="number" class="form-control" id="Amount" name="amounts" required value="10000"
+                            disabled>
                     </div>
                     <div class="mb-3">
                         <label for="Utr" class="form-label">UTR Number</label>
@@ -342,166 +350,167 @@
 
 
     <script>
-        // Get the modal
-        const modal = document.getElementById("custom-modal");
+    // Get the modal
+    const modal = document.getElementById("custom-modal");
 
-        // Get the button that opens the modal
-        const payNowBtn = document.querySelector(".pay");
+    // Get the button that opens the modal
+    const payNowBtn = document.querySelector(".pay");
 
-        // Get the <span> element that closes the modal
-        const closeBtn = document.querySelector(".custom-modal-close");
+    // Get the <span> element that closes the modal
+    const closeBtn = document.querySelector(".custom-modal-close");
 
-        // Get the cancel button
-        const cancelBtn = document.querySelector(".custom-modal-cancel");
+    // Get the cancel button
+    const cancelBtn = document.querySelector(".custom-modal-cancel");
 
-        // Open the modal
-        payNowBtn.onclick = function() {
-            modal.style.display = "block";
-        }
+    // Open the modal
+    payNowBtn.onclick = function() {
+        modal.style.display = "block";
+    }
 
-        // Close the modal when the user clicks on <span> (x) or Cancel button
-        closeBtn.onclick = function() {
+    // Close the modal when the user clicks on <span> (x) or Cancel button
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    cancelBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close the modal when the user clicks anywhere outside of the modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
-
-        cancelBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // Close the modal when the user clicks anywhere outside of the modal
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+    }
     </script>
 
     <script>
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll(".form-section");
-            sections.forEach((section) => section.classList.remove("active"));
-            document.getElementById("section-" + sectionId).classList.add("active");
-        }
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll(".form-section");
+        sections.forEach((section) => section.classList.remove("active"));
+        document.getElementById("section-" + sectionId).classList.add("active");
+    }
 
-        function nextSection(sectionId) {
-            const currentSectionId = `section-${sectionId - 1}`;
-            const nextSectionId = `section-${sectionId }`;
+    function nextSection(sectionId) {
+        const currentSectionId = `section-${sectionId - 1}`;
+        const nextSectionId = `section-${sectionId }`;
 
-            if (sectionId === 3) {
-                // Validate password and confirm password in section 3
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('re-password').value;
+        if (sectionId === 3) {
+            // Validate password and confirm password in section 3
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('re-password').value;
 
-                if (password !== confirmPassword) {
-                    Swal.fire('Error', 'Passwords do not match!', 'error');
-                    return;
-                }
-            }
-
-            if (validateSection(currentSectionId)) {
-                showSection(sectionId);
+            if (password !== confirmPassword) {
+                Swal.fire('Error', 'Passwords do not match!', 'error');
+                return;
             }
         }
 
-        function validateSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            let isValid = true;
-            let missingFields = [];
+        if (validateSection(currentSectionId)) {
+            showSection(sectionId);
+        }
+    }
 
-            const inputs = section.querySelectorAll('input[required], select[required]');
-            inputs.forEach(input => {
-                if (input.type === 'file') {
-                    if (input.files.length === 0) {
-                        isValid = false;
-                        const fieldName = input.getAttribute('data-field-name'); // Get the specific field name
-                        if (fieldName) {
-                            missingFields.push(fieldName);
-                        } else {
-                            missingFields.push("File Input"); // Default name if not set
-                        }
-                        input.style.borderColor = 'red';
-                        input.addEventListener('change', () => input.style.borderColor = '');
-                    } else {
-                        input.style.borderColor = '';
-                    }
-                    return;
-                }
+    function validateSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        let isValid = true;
+        let missingFields = [];
 
-                if (!input.value) {
+        const inputs = section.querySelectorAll('input[required], select[required]');
+        inputs.forEach(input => {
+            if (input.type === 'file') {
+                if (input.files.length === 0) {
                     isValid = false;
-                    const label = input.previousElementSibling.textContent.trim();
-                    const fieldName = label.replace(/:$/, '').trim(); // Remove trailing colon and trim
-                    missingFields.push(fieldName);
+                    const fieldName = input.getAttribute('data-field-name'); // Get the specific field name
+                    if (fieldName) {
+                        missingFields.push(fieldName);
+                    } else {
+                        missingFields.push("File Input"); // Default name if not set
+                    }
                     input.style.borderColor = 'red';
-                    input.addEventListener('input', () => input.style.borderColor = '');
+                    input.addEventListener('change', () => input.style.borderColor = '');
                 } else {
                     input.style.borderColor = '';
                 }
-            });
-
-            if (!isValid) {
-                const formattedFields = missingFields.map(field =>
-                    field.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
-                ).join(', ');
-
-                Swal.fire({
-                    title: 'Incomplete Form',
-                    html: `Please fill out the following fields: <strong>${formattedFields}</strong>`,
-                    icon: 'warning',
-                    confirmButtonText: 'OK',
-                    customClass: {
-                        title: 'swal-title',
-                        content: 'swal-content'
-                    }
-                });
+                return;
             }
 
-            return isValid;
-        }
-
-
-
-
-
-
-        function prevSection(sectionId) {
-            showSection(sectionId);
-        }
-
-        // Initially show the first section
-        document.addEventListener("DOMContentLoaded", () => {
-            showSection(1);
+            if (!input.value) {
+                isValid = false;
+                const label = input.previousElementSibling.textContent.trim();
+                const fieldName = label.replace(/:$/, '').trim(); // Remove trailing colon and trim
+                missingFields.push(fieldName);
+                input.style.borderColor = 'red';
+                input.addEventListener('input', () => input.style.borderColor = '');
+            } else {
+                input.style.borderColor = '';
+            }
         });
 
-        document.getElementById('multi-section-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+        if (!isValid) {
+            const formattedFields = missingFields.map(field =>
+                field.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
+            ).join(', ');
 
-            var formData = new FormData(this);
+            Swal.fire({
+                title: 'Incomplete Form',
+                html: `Please fill out the following fields: <strong>${formattedFields}</strong>`,
+                icon: 'warning',
+                confirmButtonText: 'OK',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content'
+                }
+            });
+        }
 
-            fetch('./dashboard/phpdata/signup.php', {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        Swal.fire({
-                            title: 'Success',
-                            text: data.message,
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            // Redirect to dashboard after clicking OK
-                            window.location.href = './dashboard'; // Adjust the URL according to your dashboard path
-                        });
-                    } else {
-                        Swal.fire('Error', data.message, 'error');
-                    }
-                })
-                .catch(error => {
-                    Swal.fire('Error', 'An unexpected error occurred!', 'error');
-                });
-        });
+        return isValid;
+    }
+
+
+
+
+
+
+    function prevSection(sectionId) {
+        showSection(sectionId);
+    }
+
+    // Initially show the first section
+    document.addEventListener("DOMContentLoaded", () => {
+        showSection(1);
+    });
+
+    document.getElementById('multi-section-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var formData = new FormData(this);
+
+        fetch('./dashboard/phpdata/signup.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire({
+                        title: 'Success',
+                        text: data.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Redirect to dashboard after clicking OK
+                        window.location.href =
+                            './dashboard'; // Adjust the URL according to your dashboard path
+                    });
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            })
+            .catch(error => {
+                Swal.fire('Error', 'An unexpected error occurred!', 'error');
+            });
+    });
     </script>
 
 
