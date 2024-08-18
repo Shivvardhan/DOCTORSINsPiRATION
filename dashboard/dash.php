@@ -11,7 +11,7 @@ if ($mode['register'] != 'paid') {
 $stmt = $conn->prepare("SELECT l_token FROM `users` WHERE `username` = ?");
 $stmt->bind_param('s', $_SESSION['username']);
 $stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt->get_result();  
 $user = $result->fetch_assoc();
 if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']) && session_status() === PHP_SESSION_ACTIVE && $_SESSION['usertype']) {
     require "./component/menu.php";
@@ -302,7 +302,23 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         <div class="poppins info-text">
                             Total Number Of Offer Letters
                         </div>
-                        <div class="info-subtext">(5)
+                        <div class="info-subtext">
+                            (<?php 
+                            
+                            $sql = "SELECT COUNT(*) AS offer_letters FROM `letters` WHERE letter_type='offer_letter'";
+
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                              // output data of each row
+                              while($row = $result->fetch_assoc()) {
+                                echo $row['offer_letters'];
+                              }
+                            } else {
+                                echo "0";
+                            }
+
+                            ?>)
                         </div>
                     </div>
                 </div>
@@ -328,7 +344,22 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         <div class="poppins info-text">
                             Total Number Of Invitation Letters
                         </div>
-                        <div class="info-subtext">(5)
+                        <div class="info-subtext">(<?php 
+                            
+                            $sql = "SELECT COUNT(*) AS invitation_letters FROM `letters` WHERE letter_type='invitation_letter'";
+
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                              // output data of each row
+                              while($row = $result->fetch_assoc()) {
+                                echo $row['invitation_letters'];
+                              }
+                            } else {
+                                echo "0";
+                            }
+
+                            ?>)
                         </div>
                     </div>
                 </div>
@@ -356,7 +387,22 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         <div class="poppins info-text">
                             Total Number Of Passport Couriered
                         </div>
-                        <div class="info-subtext">(5)
+                        <div class="info-subtext">(<?php 
+                            
+                            $sql = "SELECT COUNT(*) AS Courier FROM `courier`";
+
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                              // output data of each row
+                              while($row = $result->fetch_assoc()) {
+                                echo $row['Courier'];
+                              }
+                            } else {
+                                echo "0";
+                            }
+
+                            ?>)
                         </div>
                     </div>
                 </div>
@@ -382,7 +428,22 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         <div class="poppins info-text">
                             Total Number Of Visa Processed
                         </div>
-                        <div class="info-subtext">(5)
+                        <div class="info-subtext">(<?php 
+                            
+                            $sql = "SELECT COUNT(*) AS Visa FROM `visa_details` WHERE status='Processed'";
+
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                              // output data of each row
+                              while($row = $result->fetch_assoc()) {
+                                echo $row['Visa'];
+                              }
+                            } else {
+                                echo "0";
+                            }
+
+                            ?>)
                         </div>
                     </div>
                 </div>
@@ -450,9 +511,23 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                                 Application
                                 Submitted
                             </div>
-                            <div class="info-subtext">(DATE
-                                Of
-                                Submission)
+                            <div class="info-subtext">(<?php 
+                                $uid = $_SESSION['uid'];
+                                            
+                                $sql = "SELECT timestamp FROM `users` WHERE uid='$uid'";
+                                            
+                                $result = $conn->query($sql);
+                                            
+                                if ($result->num_rows == 1) {
+                                    while($row = $result->fetch_assoc()) {
+                                        $timestamp = $row['timestamp'];
+                                        $date = new DateTime($timestamp);
+                                        echo $date->format('d-m-Y'); // Change the format as needed
+                                    }
+                                } else {
+                                    echo "DATE Of Submission";
+                                }
+                                ?>)
                             </div>
                             <div class="info-status">(Approved)
                             </div>
@@ -478,10 +553,42 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         <div class="col-9 px-4">
                             <div class="poppins info-text">Invitation Letter
                             </div>
-                            <div class="info-subtext">(DATE Of
-                                Submission)
+                            <div class="info-subtext">
+                                (<?php 
+                                $uid = $_SESSION['uid'];
+                                            
+                                $sql = "SELECT timestamp FROM `letters` WHERE uid='$uid' AND letter_type='invitation_letter'";
+                                            
+                                $result = $conn->query($sql);
+                                            
+                                if ($result->num_rows == 1) {
+                                    while($row = $result->fetch_assoc()) {
+                                        $timestamp = $row['timestamp'];
+                                        $date = new DateTime($timestamp);
+                                        echo $date->format('d-m-Y'); // Change the format as needed
+                                    }
+                                } else {
+                                    echo "DATE Of Submission";
+                                }
+                                ?>)
                             </div>
-                            <div class="info-status">(Inprocess)
+                            <div class="info-status">
+                                (<?php 
+                                $uid = $_SESSION['uid'];
+                                            
+                                $sql = "SELECT status FROM `letters` WHERE uid='$uid' AND letter_type='invitation_letter'";
+                                            
+                                $result = $conn->query($sql);
+                                            
+                                if ($result->num_rows == 1) {
+                                    while($row = $result->fetch_assoc()) {
+                                        
+                                        echo $row['status'];
+                                    }
+                                } else {
+                                    echo "Inprocess";
+                                }
+                                ?>)
                             </div>
                         </div>
                     </div>
@@ -505,10 +612,40 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         <div class="col-9 px-4">
                             <div class="poppins info-text">Offer Letter
                             </div>
-                            <div class="info-subtext">(DATE Of
-                                Submission)
+                            <div class="info-subtext">(<?php 
+                                $uid = $_SESSION['uid'];
+                                            
+                                $sql = "SELECT timestamp FROM `letters` WHERE uid='$uid' AND letter_type='offer_letter'";
+                                            
+                                $result = $conn->query($sql);
+                                            
+                                if ($result->num_rows == 1) {
+                                    while($row = $result->fetch_assoc()) {
+                                        $timestamp = $row['timestamp'];
+                                        $date = new DateTime($timestamp);
+                                        echo $date->format('d-m-Y'); // Change the format as needed
+                                    }
+                                } else {
+                                    echo "DATE Of Submission";
+                                }
+                                ?>)
                             </div>
-                            <div class="info-status">(Inprocess)
+                            <div class="info-status">(<?php 
+                                $uid = $_SESSION['uid'];
+                                            
+                                $sql = "SELECT status FROM `letters` WHERE uid='$uid' AND letter_type='offer_letter'";
+                                            
+                                $result = $conn->query($sql);
+                                            
+                                if ($result->num_rows == 1) {
+                                    while($row = $result->fetch_assoc()) {
+                                        
+                                        echo $row['status'];
+                                    }
+                                } else {
+                                    echo "Inprocess";
+                                }
+                                ?>)
                             </div>
                         </div>
                     </div>
@@ -533,10 +670,38 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                             <div class="poppins info-text">Pre -
                                 Departure
                             </div>
-                            <div class="info-subtext">(DATE Of
-                                Session)
+                            <div class="info-subtext">
+                                (<?php 
+                                            
+                                $sql = "SELECT session_date AS date FROM `session_details`";
+                                            
+                                $result = $conn->query($sql);
+                                            
+                                if ($result->num_rows == 1) {
+                                    while($row = $result->fetch_assoc()) {
+                                        
+                                        echo $row['date'];
+                                    }
+                                } else {
+                                    echo "Date Of Session";
+                                }
+                                ?>)
                             </div>
-                            <div class="info-status">(Rejected)
+                            <div class="info-status">(<?php 
+                                            
+                                $sql = "SELECT COUNT(*) AS Session FROM `session_details`";
+                                            
+                                $result = $conn->query($sql);
+                                            
+                                if ($result->num_rows == 1) {
+                                    while($row = $result->fetch_assoc()) {
+                                        
+                                        echo "Scheduled";
+                                    }
+                                } else {
+                                    echo "Not Scheduled";
+                                }
+                                ?>)
                             </div>
                         </div>
                     </div>

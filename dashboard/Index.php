@@ -154,14 +154,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                                 <!--end::Subtitle=-->
                             </div>
-                            <!--begin::Heading-->
-                            <!--begin::Login options-->
-
-                            <!--end::Login options-->
-                            <!--begin::Separator-->
-
-                            <!--end::Separator-->
-                            <!--begin::Input group=-->
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
                                 <input type="text" placeholder="Email" name="username" autocomplete="off"

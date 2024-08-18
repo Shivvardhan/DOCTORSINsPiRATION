@@ -288,7 +288,22 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                             <div class="poppins info-text">
                                 New Registrations
                             </div>
-                            <div class="info-subtext">(1200)
+                            <div class="info-subtext">(<?php 
+                            
+                            $sql = "SELECT COUNT(*) AS Register FROM `payments` WHERE payment_type='register' AND payment_status=''";
+
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                              // output data of each row
+                              while($row = $result->fetch_assoc()) {
+                                echo $row['Register'];
+                              }
+                            } else {
+                                echo "0";
+                            }
+
+                            ?>)
                             </div>
                         </div>
                     </div>
@@ -313,7 +328,22 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                             <div class="poppins info-text">
                                 Admission In Process
                             </div>
-                            <div class="info-subtext">(1200)
+                            <div class="info-subtext">(<?php 
+                            
+                            $sql = "SELECT COUNT(*) AS Admission FROM `payments` WHERE payment_type='register' AND payment_status='ACCEPTED'";
+
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                              // output data of each row
+                              while($row = $result->fetch_assoc()) {
+                                echo $row['Admission'];
+                              }
+                            } else {
+                                echo "0";
+                            }
+
+                            ?>)
                             </div>
                         </div>
                     </div>

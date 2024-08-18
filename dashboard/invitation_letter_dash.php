@@ -285,12 +285,25 @@ if ($user['l_token'] == isset($_SESSION['token']) && isset($_SESSION['username']
                         </div>
                         <div class="col-8 mln">
                             <div class="poppins info-text">
-                                Application
-                                Submitted
+                                Inivitation Letter
                             </div>
-                            <div class="info-subtext">(DATE
-                                Of
-                                Submission)
+                            <div class="info-subtext">(<?php 
+                                $uid = $_SESSION['uid'];
+                                            
+                                $sql = "SELECT timestamp FROM `letters` WHERE uid='$uid' AND letter_type='invitation_letter'";
+                                            
+                                $result = $conn->query($sql);
+                                            
+                                if ($result->num_rows == 1) {
+                                    while($row = $result->fetch_assoc()) {
+                                        $timestamp = $row['timestamp'];
+                                        $date = new DateTime($timestamp);
+                                        echo $date->format('d-m-Y'); // Change the format as needed
+                                    }
+                                } else {
+                                    echo "DATE Of Submission";
+                                }
+                                ?>)
                             </div>
                             <div class="info-status">(Approved)
                             </div>
