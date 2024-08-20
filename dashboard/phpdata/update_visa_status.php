@@ -33,8 +33,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($stmt->execute()) {
-            $response['success'] = true;
-            $response['message'] = $message;
+            // If the visa status is "Processed", update the mode table
+            if ($visaStatus === 'Processed') {
+                $updateModeSql = "UPDATE mode SET post_depart = 'paid' WHERE uid = ?";
+                $updateModeStmt = $conn->prepare($updateModeSql);
+                $updateModeStmt->bind_param('i', $studentId);
+                if ($updateModeStmt->execute()) {
+                    $response['success'] = true;
+                    $response['message'] = $message . ' Mode updated successfully.';
+                } else {
+                    $response['success'] = false;
+                    $response['message'] = 'Visa status updated, but failed to update mode.';
+                }
+                $updateModeStmt->close();
+            } else {
+                $response['success'] = true;
+                $response['message'] = $message;
+            }
         } else {
             $response['message'] = 'Database operation failed. Please try again.';
         }

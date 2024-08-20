@@ -66,22 +66,22 @@ while ($row = $result->fetch_assoc()) {
     $fees = '0';
 
     if ($row['register'] != "paid") {
-        $status = 'UnActive'; // Default status
+        $status = 'UnActive'; // Default status if registration is not paid
         $fees = '0';
     } elseif ($row['application'] != "paid") {
-        $status = "Registered";
+        $status = "Registered"; // Registration is paid, but the application is not
         $fees = '10,000';    
     } elseif ($row['invitation_letter'] != "paid") {
-        $status = "Offer Letter";
+        $status = "Offer Letter"; // Application is paid, but the invitation letter is not
         $fees = '60,000';  
     } elseif ($row['pre_depart'] != "paid") {
-        $status = "Invitation Letter";
+        $status = "Invitation Letter"; // Invitation letter is paid, but pre-departure is not
         $fees = '110,000';
-    } elseif ($row['pre_depart'] == "paid") {
-        $status = "Pre-Departure";
+    } elseif ($row['post_depart'] != "paid") {
+        $status = "Pre-Departure"; // All previous steps are paid, pre-departure is the current stage
         $fees = '110,000';
-    } else {
-        $status = "Post-Departure";
+    } elseif ($row['post_depart'] == "paid") {
+        $status = "Post-Departure"; // All steps are completed
         $fees = '110,000';
     }
     
