@@ -22,40 +22,42 @@ if (!empty($action) && !empty($sno)) {
         if (!$stmt->execute()) {
             throw new Exception($stmt->error);
         }
-        
-        // Check payment_type and update mode table accordingly
-        if ($payment_type === 'register') {
-            // Insert or update the mode table based on uid
-            $sql = "INSERT INTO mode (uid, register) VALUES (?, 'paid') 
-                    ON DUPLICATE KEY UPDATE register = 'paid'";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('i', $uid);
-        } else {
-            // For other payment types, update the corresponding column
-            $column = '';
-            switch ($payment_type) {
-                case 'application':
-                    $column = 'application';
-                    break;
-                case 'invitation_letter':
-                    $column = 'invitation_letter';
-                    break;
-                case 'pre_depart':
-                    $column = 'pre_depart';
-                    break;
-                default:
-                    throw new Exception('Invalid payment type');
-            }
-            
-            // Insert or update the mode table based on uid and payment_type
-            $sql = "INSERT INTO mode (uid, $column) VALUES (?, 'paid') 
-                    ON DUPLICATE KEY UPDATE $column = 'paid'";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('i', $uid);
-        }
 
-        if (!$stmt->execute()) {
-            throw new Exception($stmt->error);
+        // Only insert or update in the mode table if the status is ACCEPTED
+        if ($status === 'ACCEPTED') {
+            // Check payment_type and update mode table accordingly
+            if ($payment_type === 'register') {
+                // Insert or update the mode table based on uid
+                $sql = "INSERT INTO mode (uid, register) VALUES (?, 'paid') 
+                        ON DUPLICATE KEY UPDATE register = 'paid'";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('i', $uid);
+            } else {
+                // For other payment types, update the corresponding column
+                $column = '';
+                switch ($payment_type) {
+                    case 'application':
+                        $column = 'application';
+                        break;
+                    case 'invitation_letter':
+                        $column = 'invitation_letter';
+                        break;
+                    case 'pre_depart':
+                        $column = 'pre_depart';
+                        break;
+                    default:
+                        throw new Exception('Invalid payment type');
+                }
+                // Insert or update the mode table based on uid and payment_type
+                $sql = "INSERT INTO mode (uid, $column) VALUES (?, 'paid') 
+                        ON DUPLICATE KEY UPDATE $column = 'paid'";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('i', $uid);
+            }
+
+            if (!$stmt->execute()) {
+                throw new Exception($stmt->error);
+            }
         }
 
         // Commit the transaction
@@ -74,4 +76,3 @@ if (!empty($action) && !empty($sno)) {
 }
 
 $conn->close();
-?>

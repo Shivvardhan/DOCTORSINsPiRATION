@@ -5,64 +5,76 @@ session_start();
 require('dbcon.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$password = md5($password);
-	$status = "active";
-	// Check if user exists in the database
-	$stmt = $conn->prepare("SELECT * FROM `users` WHERE `username` = ? and `status` = ?");
-	$stmt->bind_param('ss', $username, $status);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$user = $result->fetch_assoc();
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $password = md5($password);
+    $status = "active";
+    // Check if user exists in the database
+    $stmt = $conn->prepare("SELECT * FROM `users` WHERE `username` = ? and `status` = ?");
+    $stmt->bind_param('ss', $username, $status);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-	if ($user && ($user['password'] == $password)) {
-		// Login successful, set session variables
+    if ($user && ($user['password'] == $password)) {
+        // Login successful, set session variables
 
-		$_SESSION['username'] = $user['username'];
-		$_SESSION['email'] = $user['email'];
-		$_SESSION['fname'] = $user['fname'];
-		$_SESSION['lname'] = $user['lname'];
-		$_SESSION['usertype'] = $user['usertype'];
-		$_SESSION['uid'] = $user['uid'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['fname'] = $user['fname'];
+        $_SESSION['lname'] = $user['lname'];
+        $_SESSION['usertype'] = $user['usertype'];
+        $_SESSION['uid'] = $user['uid'];
 
-		$_SESSION['token'] = $token = bin2hex(random_bytes(20));
+        $_SESSION['token'] = $token = bin2hex(random_bytes(20));
 
-		$stmts = $conn->prepare("SELECT * FROM `u_details` WHERE `username` = ?");
-		$stmts->bind_param('s', $username);
-		$stmts->execute();
-		$results = $stmts->get_result();
-		$users = $results->fetch_assoc();
-		$_SESSION['bio'] = $users['bio'];
-		$_SESSION['dob'] = $users['dob'];
-
-
-		$time = date('Y-m-d H:i:s');
-		$user = $user['username'];
+        // $stmts = $conn->prepare("SELECT * FROM `u_details` WHERE `username` = ?");
+        // $stmts->bind_param('s', $username);
+        // $stmts->execute();
+        // $results = $stmts->get_result();
+        // $users = $results->fetch_assoc();
+        // $_SESSION['bio'] = $users['bio'];
+        // $_SESSION['dob'] = $users['dob'];
 
 
-
-		// $stmt = $conn->prepare("INSERT INTO users (l_token, l_time) VALUES (?, ?)");
-		$stmt = $conn->prepare("UPDATE `users` SET `l_token` = ?, l_time = ? WHERE `users`.`username`  = ?");
-		$stmt->bind_param("sss", $token, $time, $user);
-		$stmt->execute();
-
-
-		$ip_address = $_SERVER['REMOTE_ADDR'];
-		$user_agent = $_SERVER['HTTP_USER_AGENT'] ;
-		$mac_address = exec("arp $ip_address | awk '{print $4}'");
-		$stmt = $conn->prepare("INSERT INTO `u_login_log`( `uid`, `ipaddress`, `useragent`, `macaddress`) VALUES (?,?,?,?)");
-		$stmt->bind_param("isss", $_SESSION['uid'], $ip_address, $user_agent, $mac_address);
-		$stmt->execute();
+        $stmts_access = $conn->prepare("SELECT register FROM `mode` WHERE `uid` = ?");
+        $stmts_access->bind_param('i', $_SESSION['uid']);
+        $stmts_access->execute();
+        $results_access = $stmts_access->get_result();
+        $mode_data = $results_access->fetch_assoc();
 
 
+        // Check if the record is found and the register status is 'paid'
+        if (!$mode_data || $mode_data['register'] != 'paid') {
+            $error = 'Registration Payment in Process, Check after some time';
+            // You can handle the error further or display it to the user
+        } else {
 
-		header('Location: dash.php');
-		exit;
-	} else {
-		// Login failed, display error message
-		$error = 'Invalid username or password';
-	}
+            $time = date('Y-m-d H:i:s');
+            $user = $user['username'];
+
+            // $stmt = $conn->prepare("INSERT INTO users (l_token, l_time) VALUES (?, ?)");
+            $stmt = $conn->prepare("UPDATE `users` SET `l_token` = ?, l_time = ? WHERE `users`.`username`  = ?");
+            $stmt->bind_param("sss", $token, $time, $user);
+            $stmt->execute();
+
+
+            $ip_address = $_SERVER['REMOTE_ADDR'];
+            $user_agent = $_SERVER['HTTP_USER_AGENT'];
+            $mac_address = exec("arp $ip_address | awk '{print $4}'");
+            $stmt = $conn->prepare("INSERT INTO `u_login_log`( `uid`, `ipaddress`, `useragent`, `macaddress`) VALUES (?,?,?,?)");
+            $stmt->bind_param("isss", $_SESSION['uid'], $ip_address, $user_agent, $mac_address);
+            $stmt->execute();
+
+
+
+            header('Location: dash.php');
+            exit;
+        }
+    } else {
+        // Login failed, display error message
+        $error = 'Invalid username or password';
+    }
 }
 ?>
 <html lang="en">
@@ -86,23 +98,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body id="kt_body" class="app-blank app-blank">
     <!--begin::Theme mode setup on page load-->
     <script>
-    var defaultThemeMode = "light";
-    var themeMode;
-    if (document.documentElement) {
-        if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
-            themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
-        } else {
-            if (localStorage.getItem("data-bs-theme") !== null) {
-                themeMode = localStorage.getItem("data-bs-theme");
+        var defaultThemeMode = "light";
+        var themeMode;
+        if (document.documentElement) {
+            if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+                themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
             } else {
-                themeMode = defaultThemeMode;
+                if (localStorage.getItem("data-bs-theme") !== null) {
+                    themeMode = localStorage.getItem("data-bs-theme");
+                } else {
+                    themeMode = defaultThemeMode;
+                }
             }
+            if (themeMode === "system") {
+                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-bs-theme", themeMode);
         }
-        if (themeMode === "system") {
-            themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        }
-        document.documentElement.setAttribute("data-bs-theme", themeMode);
-    }
     </script>
     <!--end::Theme mode setup on page load-->
     <!--begin::Root-->
@@ -147,8 +159,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <!--begin::Title-->
                                 <h1 class="text-dark fw-bolder mb-3">Sign In</h1>
                                 <h1 class="text-danger fw-bolder mb-3"><?php if (isset($error)) {
-																			echo $error;
-																		} ?></h1>
+                                                                            echo $error;
+                                                                        } ?></h1>
                                 <!--end::Title-->
                                 <!--begin::Subtitle-->
 
@@ -224,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!--end::Root-->
     <!--begin::Javascript-->
     <script>
-    var hostUrl = "assets/";
+        var hostUrl = "assets/";
     </script>
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="assets/plugins/global/plugins.bundle.js"></script>

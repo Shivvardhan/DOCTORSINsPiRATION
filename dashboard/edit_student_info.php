@@ -412,6 +412,8 @@ window.onload = function() {
                                 </div>
 
                             </div>
+
+
                             <?php if ($_SESSION['usertype'] !== 'radmin') { ?>
                             <button type="submit" class="btn btn-primary" name="update_personal"
                                 style="background-color: #166572;">Update</button>
