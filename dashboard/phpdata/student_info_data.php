@@ -68,6 +68,9 @@ while ($row = $result->fetch_assoc()) {
     if ($row['register'] == "paid") {
         $status = "Registered";
         $fees = '10,000';
+    } elseif ($row['register'] != "paid") {
+        $status = "UnActive";
+        $fees = '0';
     } elseif ($row['application'] == "paid") {
         $status = "Offer Letter";
         $fees = '60,000';
