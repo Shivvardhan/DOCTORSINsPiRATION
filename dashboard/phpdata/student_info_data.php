@@ -65,16 +65,16 @@ while ($row = $result->fetch_assoc()) {
     $status = 'UnActive'; // Default status
     $fees = '0';
 
-    if ($row['register'] != "paid") {
+    if ($row['register'] == "paid") {
         $status = "Registered";
         $fees = '10,000';
-    } elseif ($row['application'] != "paid") {
+    } elseif ($row['application'] == "paid") {
         $status = "Offer Letter";
         $fees = '60,000';
-    } elseif ($row['invitation_letter'] != "paid") {
+    } elseif ($row['invitation_letter'] == "paid") {
         $status = "Invitation Letter";
         $fees = '110,000';
-    } elseif ($row['pre_depart'] != "paid") {
+    } elseif ($row['pre_depart'] == "paid") {
         $status = "Pre-Departure";
         $fees = '110,000';
     } else {
